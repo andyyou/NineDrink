@@ -12,28 +12,43 @@
 		/>
 	</TableRow>
 	<TableRow>
-		<Button android:text="" android:id="@+id/btn_1" 
-			android:layout_width="50px" 
-			android:layout_height="80px" 
-			android:padding="3dip">
-		</Button>
-		<Button android:text="" android:id="@+id/btn_2" 
-			android:layout_width="50px" 
-			android:layout_height="80px" 
-			android:padding="3dip">
-		</Button>   
+		<ImageButton android:id="@+id/imgbtn_1"
+			android:src="@drawable/selector" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:background="@drawable/limpid"
+			android:adjustViewBounds ="true"
+			></ImageButton>
+		<ImageButton android:id="@+id/imgbtn_2"
+			android:src="@drawable/selector" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:background="@drawable/limpid"
+			android:adjustViewBounds ="true"
+			></ImageButton> 
 	</TableRow>
 	<TableRow>
-		<Button android:text="" android:id="@+id/btn_3" 
-			android:layout_width="50px" 
-			android:layout_height="80px" 
-			android:padding="3dip">
-		</Button>
-		<Button android:text="" android:id="@+id/btn_4" 
-			android:layout_width="50px" 
-			android:layout_height="80px" 
-			android:padding="3dip">
-		</Button>   
+		<TextView android:id="@+id/show_msg"
+    		android:layout_width="fill_parent"
+    		android:layout_height="10px"
+    		android:text=""
+		/>
+	</TableRow>
+	<TableRow>
+		<ImageButton android:id="@+id/imgbtn_3"
+			android:src="@drawable/selector" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:background="@drawable/limpid"
+			android:adjustViewBounds ="true"
+			></ImageButton>
+		<ImageButton android:id="@+id/imgbtn_4"
+			android:src="@drawable/selector" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:background="@drawable/limpid"
+			android:adjustViewBounds ="true"
+			></ImageButton>  
 	</TableRow>
 	<TableRow>
 		<TextView
@@ -43,20 +58,13 @@
 		/>
 	</TableRow>
 	<TableRow>
-		<Button android:text="@string/btn_reset" android:id="@+id/btn_reset" 
-			android:layout_width="fill_parent" 
-			android:layout_span="2"
-			android:layout_height="50px" 
-			android:padding="3dip">
-		</Button>  
-	</TableRow>
-	<TableRow>
-		<ImageButton android:id="@+id/imgbtn_1"
-			android:src="@drawable/selector" 
+		<ImageButton android:id="@+id/btn_reset"
+			android:src="@drawable/selector_reset" 
 			android:layout_height="wrap_content" 
 			android:layout_width="wrap_content" 
 			android:background="@drawable/limpid"
+			android:layout_span="2"
 			android:adjustViewBounds ="true"
-			></ImageButton>
+			></ImageButton>    
 	</TableRow>
 </TableLayout>

@@ -2,11 +2,12 @@ package com.wazzup.ninedrink;
 
 import java.util.Random;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 public class Ninedrink extends Activity {
     /** Called when the activity is first created. */
@@ -16,23 +17,21 @@ public class Ninedrink extends Activity {
         setContentView(R.layout.main);
         set_number = getRandom();
         findView();
-        setLisenter();
-
-        
+        setLisenter();      
     }
-    private Button btn_1;
-    private Button btn_2;
-    private Button btn_3;
-    private Button btn_4;
-    private Button btn_reset;
+    private ImageButton btn_1;
+    private ImageButton btn_2;
+    private ImageButton btn_3;
+    private ImageButton btn_4;
+    private ImageButton btn_reset;
     private int[] set_number; 
 
     private void findView(){
-    	btn_1 = (Button)findViewById(R.id.btn_1);
-    	btn_2 = (Button)findViewById(R.id.btn_2);
-    	btn_3 = (Button)findViewById(R.id.btn_3);
-    	btn_4 = (Button)findViewById(R.id.btn_4);
-    	btn_reset = (Button)findViewById(R.id.btn_reset); 	
+    	btn_1 = (ImageButton)findViewById(R.id.imgbtn_1);
+    	btn_2 = (ImageButton)findViewById(R.id.imgbtn_2);
+    	btn_3 = (ImageButton)findViewById(R.id.imgbtn_3);
+    	btn_4 = (ImageButton)findViewById(R.id.imgbtn_4);
+    	btn_reset = (ImageButton)findViewById(R.id.btn_reset); 	
     }
     private void setLisenter(){
     	btn_reset.setOnClickListener(reset);
@@ -45,10 +44,10 @@ public class Ninedrink extends Activity {
     private Button.OnClickListener reset = new Button.OnClickListener(){
 		@Override
 		public void onClick(View v) {
-			btn_1.setText("");
-			btn_2.setText("");
-			btn_3.setText("");
-			btn_4.setText("");
+			btn_1.setImageResource(R.drawable.selector);
+			btn_2.setImageResource(R.drawable.selector);
+			btn_3.setImageResource(R.drawable.selector);
+			btn_4.setImageResource(R.drawable.selector);
 			set_number = getRandom();	
 		}
     };
@@ -57,17 +56,17 @@ public class Ninedrink extends Activity {
     	@Override
 		public void onClick(View v) {
     		switch(v.getId()){
-    			case R.id.btn_1:
-    				btn_1.setText(Integer.toString(set_number[0]));
+    			case R.id.imgbtn_1:
+    				btn_1.setImageResource(set_number[0]);
     				break;
-    			case R.id.btn_2:
-    				btn_2.setText(Integer.toString(set_number[1]));
+    			case R.id.imgbtn_2:
+    				btn_2.setImageResource(set_number[1]);
     				break;
-    			case R.id.btn_3:
-    				btn_3.setText(Integer.toString(set_number[2]));
+    			case R.id.imgbtn_3:
+    				btn_3.setImageResource(set_number[2]);
     				break;
-    			case R.id.btn_4:
-    				btn_4.setText(Integer.toString(set_number[3]));
+    			case R.id.imgbtn_4:
+    				btn_4.setImageResource(set_number[3]);
     				break;
     		}
 		}
@@ -75,7 +74,7 @@ public class Ninedrink extends Activity {
 	//亂數排序
     private int[] getRandom(){
     		//初始化
-    		int x[] = {1,2,3,4};
+    		int x[] = {R.drawable.icon_7,R.drawable.icon_8,R.drawable.icon_9,R.drawable.icon_p};
     		int y, tmp;
             Random r = new Random(System.currentTimeMillis()); 
             //洗牌
