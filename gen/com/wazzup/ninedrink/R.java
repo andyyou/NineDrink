@@ -18,28 +18,37 @@ public final class R {
         public static final int icon_android=0x7f020004;
         public static final int icon_android_dark=0x7f020005;
         public static final int icon_android_light=0x7f020006;
-        public static final int icon_facebook=0x7f020007;
-        public static final int icon_p=0x7f020008;
-        public static final int icon_reset=0x7f020009;
-        public static final int icon_reset_dark=0x7f02000a;
-        public static final int icon_reset_light=0x7f02000b;
-        public static final int limpid=0x7f02000e;
-        public static final int selector=0x7f02000c;
-        public static final int selector_reset=0x7f02000d;
+        public static final int icon_close=0x7f020007;
+        public static final int icon_close_dark=0x7f020008;
+        public static final int icon_close_light=0x7f020009;
+        public static final int icon_facebook=0x7f02000a;
+        public static final int icon_p=0x7f02000b;
+        public static final int icon_reset=0x7f02000c;
+        public static final int icon_reset_dark=0x7f02000d;
+        public static final int icon_reset_light=0x7f02000e;
+        public static final int limpid=0x7f020012;
+        public static final int selector=0x7f02000f;
+        public static final int selector_close=0x7f020010;
+        public static final int selector_reset=0x7f020011;
     }
     public static final class id {
-        public static final int btn_reset=0x7f050005;
-        public static final int imgbtn_1=0x7f050001;
-        public static final int imgbtn_2=0x7f050002;
-        public static final int imgbtn_3=0x7f050003;
-        public static final int imgbtn_4=0x7f050004;
+        public static final int btn_reset=0x7f050006;
+        public static final int imgbtn_1=0x7f050002;
+        public static final int imgbtn_2=0x7f050003;
+        public static final int imgbtn_3=0x7f050004;
+        public static final int imgbtn_4=0x7f050005;
+        public static final int imgbtn_close=0x7f050001;
         public static final int show_msg=0x7f050000;
     }
     public static final class layout {
         public static final int main=0x7f030000;
     }
     public static final class string {
+        public static final int about_msg=0x7f040005;
+        public static final int about_title=0x7f040004;
         public static final int app_name=0x7f040001;
         public static final int btn_reset=0x7f040000;
+        public static final int lb_homepage=0x7f040002;
+        public static final int url_homepage=0x7f040003;
     }
 }
