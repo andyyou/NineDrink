@@ -2,25 +2,27 @@ package com.wazzup.ninedrink;
 
 import java.util.Random;
 
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class Ninedrink extends Activity {
+public class Ninedrink extends Activity implements SensorEventListener  {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,9 @@ public class Ninedrink extends Activity {
         setContentView(R.layout.main);
         set_number = getRandom();
         findView();
-        setLisenter();      
+        setLisenter();  
+        shake();
+        
     }
     private ImageView btn_1;
     private ImageView btn_2;
@@ -45,6 +49,28 @@ public class Ninedrink extends Activity {
     //private boolean btn_4_pressed = false;
     //老千模式變數
     private int cheat_mod =0; // 0:NoStatus,1:AlwaysLose,2:AlwaysWin
+    //偵測搖晃
+    private static final int MIN_FORCE = 10;
+    private static final int MIN_DIRECTION_CHANGE = 3;
+    private static final int MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE = 200;
+    private static final int MAX_TOTAL_DURATION_OF_SHAKE = 400;
+    private long mFirstDirectionChangeTime = 0;
+    private long mLastDirectionChangeTime;
+    private int mDirectionChangeCount = 0;
+    private float lastX = 0;
+    private float lastY = 0;
+    private float lastZ = 0;
+    private OnShakeListener mShakeListener;
+    private SensorManager mSensorManager;
+    private Ninedrink mSensorListener;
+    
+    //搖晃介面
+    public interface OnShakeListener {
+        void onShake();
+    }
+    public void setOnShakeListener(OnShakeListener listener) {
+        mShakeListener = listener;
+    }
     private void findView(){
     	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
     	btn_2 = (ImageView)findViewById(R.id.imgbtn_2);
@@ -61,26 +87,89 @@ public class Ninedrink extends Activity {
     	btn_3.setOnClickListener(open);
     	btn_4.setOnClickListener(open);
     }
+    //搖晃事件相關設定
+    @Override
+    public void onSensorChanged(SensorEvent se) {
+    	float x = se.values[SensorManager.DATA_X];
+    	float y = se.values[SensorManager.DATA_Y];
+    	float z = se.values[SensorManager.DATA_Z];
+    	float totalMovement = Math.abs(x + y + z - lastX - lastY - lastZ);
+    	if (totalMovement > MIN_FORCE) {
+    		long now = System.currentTimeMillis();
+        if (mFirstDirectionChangeTime == 0) {
+        	mFirstDirectionChangeTime = now;
+        	mLastDirectionChangeTime = now;
+        }
+        long lastChangeWasAgo = now - mLastDirectionChangeTime;
+        if (lastChangeWasAgo < MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE) {
+        	mLastDirectionChangeTime = now;
+        	mDirectionChangeCount++; 
+        	lastX = x;
+        	lastY = y;
+        	lastZ = z;
+        	if (mDirectionChangeCount >= MIN_DIRECTION_CHANGE) {
+        		long totalDuration = now - mFirstDirectionChangeTime;
+        		if (totalDuration < MAX_TOTAL_DURATION_OF_SHAKE) {
+        			mShakeListener.onShake();
+        			resetShakeParameters();
+        		}
+        	}
+        }else{
+          resetShakeParameters();
+        }
+      }
+    }
+
+    private void resetShakeParameters() {
+      mFirstDirectionChangeTime = 0;
+      mDirectionChangeCount = 0;
+      mLastDirectionChangeTime = 0;
+      lastX = 0;
+      lastY = 0;
+      lastZ = 0;
+    }
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    	// TODO Auto-generated method stub
+    	
+    }
+    //搖晃動作
+    private void shake(){
+    	mSensorListener = new Ninedrink();
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager.registerListener(mSensorListener,
+        mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_UI);
+        mSensorListener.setOnShakeListener(new Ninedrink.OnShakeListener() {
+        public void onShake() {
+        	reset_card();
+          }
+        });
+    }
     //洗牌事件
     private View.OnClickListener reset = new View.OnClickListener(){
 		@Override
 		public void onClick(View v) {
-			btn_1.setImageResource(R.drawable.selector);
-			btn_2.setImageResource(R.drawable.selector);
-			btn_3.setImageResource(R.drawable.selector);
-			btn_4.setImageResource(R.drawable.selector);
-			for(int i=0;i<4;i++){
-				is_btn_pressed[i]=false;
-			}
-			/*
-			btn_1_pressed = false;
-			btn_2_pressed = false;
-			btn_3_pressed = false;
-			btn_4_pressed = false;
-			*/
-			set_number = getRandom();	
+			reset_card();
 		}
     };
+    //重構洗牌事件
+    private void reset_card(){
+    	btn_1.setImageResource(R.drawable.selector);
+		btn_2.setImageResource(R.drawable.selector);
+		btn_3.setImageResource(R.drawable.selector);
+		btn_4.setImageResource(R.drawable.selector);
+		for(int i=0;i<4;i++){
+			is_btn_pressed[i]=false;
+		}
+		/*
+		btn_1_pressed = false;
+		btn_2_pressed = false;
+		btn_3_pressed = false;
+		btn_4_pressed = false;
+		*/
+		set_number = getRandom();
+    }
     //翻牌事件
     private View.OnClickListener open = new View.OnClickListener(){
     	@Override
@@ -263,4 +352,6 @@ public class Ninedrink extends Activity {
 	    popup.show();
 	}
 	*/
+
+
 }
