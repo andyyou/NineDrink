@@ -187,6 +187,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     			case R.id.imgbtn_1: 
     				switch_cards(0);
     				btn_pressed = 1;
+    				
     				break;
     			case R.id.imgbtn_2:  
     				switch_cards(1);
@@ -217,22 +218,18 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     				    case 1:    	
     				    	btn_1.setImageResource(set_number[0]);
     				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	mVibrator.vibrate(100);
     				    	break;
     				    case 2:
     				    	btn_2.setImageResource(set_number[1]);
     				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	mVibrator.vibrate(100);
     				    	break;
     				    case 3:
     				    	btn_3.setImageResource(set_number[2]);
     				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	mVibrator.vibrate(100);
     				    	break;
     				    case 4:
     				    	btn_4.setImageResource(set_number[3]);
     				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	mVibrator.vibrate(100);
     				    	break;
     				}
     			}
@@ -241,18 +238,22 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 			{
 			    case 1:
 			    	if(!is_btn_pressed[0]) btn_1.startAnimation(animation);
+			    	call_v(0);
 			    	is_btn_pressed[0]= true;
 				    break;
 			    case 2:
 			    	if(!is_btn_pressed[1]) btn_2.startAnimation(animation);
+			    	call_v(1);
 			    	is_btn_pressed[1] = true;
 				    break;
 			    case 3:
 			    	if(!is_btn_pressed[2]) btn_3.startAnimation(animation);
+			    	call_v(2);
 			    	is_btn_pressed[2] = true;
 				    break;
 			    case 4:
 			    	if(!is_btn_pressed[3]) btn_4.startAnimation(animation);
+			    	call_v(3);
 			    	is_btn_pressed[3] = true;
 				    break;
 			}
@@ -359,6 +360,12 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 				 }
 		   }		
 	   }else{}
+   }
+   //輸了震動
+   private void call_v(int n){
+	   if (set_number[n] == R.drawable.icon_9){
+		   mVibrator.vibrate(500);
+	   }
    }
    /*//測試訊息
    private void openTestDialog(){
