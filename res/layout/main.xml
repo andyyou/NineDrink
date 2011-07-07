@@ -88,6 +88,6 @@
 			android:background="@drawable/limpid"
 			android:layout_span="4"
 			android:adjustViewBounds ="true"
-			/>    
+			/>  
 	</TableRow>
 </TableLayout>

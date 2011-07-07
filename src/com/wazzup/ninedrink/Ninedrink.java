@@ -4,6 +4,7 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +32,10 @@ public class Ninedrink extends Activity implements SensorEventListener  {
         setContentView(R.layout.main);
         set_number = getRandom();
         findView();
+        otherObject();
         setLisenter();  
         shake();
+        
         
     }
     private ImageView btn_1;
@@ -63,7 +67,8 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     private OnShakeListener mShakeListener;
     private SensorManager mSensorManager;
     private Ninedrink mSensorListener;
-    
+    //Vibrator物件
+    private Vibrator mVibrator;
     //搖晃介面
     public interface OnShakeListener {
         void onShake();
@@ -86,6 +91,9 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     	btn_2.setOnClickListener(open);
     	btn_3.setOnClickListener(open);
     	btn_4.setOnClickListener(open);
+    }
+    private void otherObject(){
+    	mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
     }
     //搖晃事件相關設定
     @Override
@@ -169,6 +177,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 		btn_4_pressed = false;
 		*/
 		set_number = getRandom();
+		mVibrator.vibrate(1000);
     }
     //翻牌事件
     private View.OnClickListener open = new View.OnClickListener(){
@@ -208,19 +217,23 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     				    case 1:    	
     				    	btn_1.setImageResource(set_number[0]);
     				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    					    break;
+    				    	mVibrator.vibrate(100);
+    				    	break;
     				    case 2:
     				    	btn_2.setImageResource(set_number[1]);
     				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    					    break;
+    				    	mVibrator.vibrate(100);
+    				    	break;
     				    case 3:
     				    	btn_3.setImageResource(set_number[2]);
     				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    					    break;
+    				    	mVibrator.vibrate(100);
+    				    	break;
     				    case 4:
     				    	btn_4.setImageResource(set_number[3]);
     				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    					    break;
+    				    	mVibrator.vibrate(100);
+    				    	break;
     				}
     			}
     		});
@@ -304,8 +317,9 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     //結束程式
     private Button.OnClickListener close = new Button.OnClickListener(){
 		@Override
-		public void onClick(View v) {
-			finish();	
+		public void onClick(View v) {       
+            int pid = android.os.Process.myPid(); 
+            android.os.Process.killProcess(pid); 	
 		}  	
     };
     //老千模式:監聽音量建
