@@ -12,10 +12,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class Ninedrink extends Activity {
     /** Called when the activity is first created. */
@@ -27,21 +29,27 @@ public class Ninedrink extends Activity {
         findView();
         setLisenter();      
     }
-    private ImageButton btn_1;
-    private ImageButton btn_2;
-    private ImageButton btn_3;
-    private ImageButton btn_4;
-    private ImageButton btn_reset;
-    private ImageButton btn_close;
+    private ImageView btn_1;
+    private ImageView btn_2;
+    private ImageView btn_3;
+    private ImageView btn_4;
+    private ImageView btn_reset;
+    private ImageView btn_close;
     private int[] set_number; 
-
+    //用來判斷是否已翻開
+    private int btn_pressed;
+    private boolean btn_1_pressed = false;
+    private boolean btn_2_pressed = false;
+    private boolean btn_3_pressed = false;
+    private boolean btn_4_pressed = false;
+    
     private void findView(){
-    	btn_1 = (ImageButton)findViewById(R.id.imgbtn_1);
-    	btn_2 = (ImageButton)findViewById(R.id.imgbtn_2);
-    	btn_3 = (ImageButton)findViewById(R.id.imgbtn_3);
-    	btn_4 = (ImageButton)findViewById(R.id.imgbtn_4);
-    	btn_reset = (ImageButton)findViewById(R.id.btn_reset); 	
-    	btn_close = (ImageButton)findViewById(R.id.imgbtn_close);
+    	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
+    	btn_2 = (ImageView)findViewById(R.id.imgbtn_2);
+    	btn_3 = (ImageView)findViewById(R.id.imgbtn_3);
+    	btn_4 = (ImageView)findViewById(R.id.imgbtn_4);
+    	btn_reset = (ImageView)findViewById(R.id.btn_reset); 	
+    	btn_close = (ImageView)findViewById(R.id.imgbtn_close);
     }
     private void setLisenter(){
     	btn_reset.setOnClickListener(reset);
@@ -52,34 +60,92 @@ public class Ninedrink extends Activity {
     	btn_4.setOnClickListener(open);
     }
     //洗牌事件
-    private Button.OnClickListener reset = new Button.OnClickListener(){
+    private View.OnClickListener reset = new View.OnClickListener(){
 		@Override
 		public void onClick(View v) {
 			btn_1.setImageResource(R.drawable.selector);
 			btn_2.setImageResource(R.drawable.selector);
 			btn_3.setImageResource(R.drawable.selector);
 			btn_4.setImageResource(R.drawable.selector);
+			btn_1_pressed = false;
+			btn_2_pressed = false;
+			btn_3_pressed = false;
+			btn_4_pressed = false;
 			set_number = getRandom();	
 		}
     };
     //翻牌事件
-    private Button.OnClickListener open = new Button.OnClickListener(){
+    private View.OnClickListener open = new View.OnClickListener(){
     	@Override
 		public void onClick(View v) {
     		switch(v.getId()){
     			case R.id.imgbtn_1:
-    				btn_1.setImageResource(set_number[0]);
+    				//btn_1.setImageResource(set_number[0]);
+    				btn_pressed = 1;
     				break;
     			case R.id.imgbtn_2:
-    				btn_2.setImageResource(set_number[1]);
+    				//btn_2.setImageResource(set_number[1]);
+    				btn_pressed = 2;
     				break;
     			case R.id.imgbtn_3:
-    				btn_3.setImageResource(set_number[2]);
+    				//btn_3.setImageResource(set_number[2]);
+    				btn_pressed = 3;
     				break;
     			case R.id.imgbtn_4:
-    				btn_4.setImageResource(set_number[3]);
+    				//btn_4.setImageResource(set_number[3]);
+    				btn_pressed = 4;
     				break;
     		}
+    		Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
+    		animation.setAnimationListener(new Animation.AnimationListener() {
+    			@Override
+    			public void onAnimationStart(Animation animation) { }
+    			
+    			@Override
+    			public void onAnimationRepeat(Animation animation) { }
+    			
+    			@Override
+    			public void onAnimationEnd(Animation animation) {
+    				switch(btn_pressed)
+    				{
+    				    case 1:
+    				    	btn_1.setImageResource(set_number[0]);
+    				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+    					    break;
+    				    case 2:
+    				    	btn_2.setImageResource(set_number[1]);
+    				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+    					    break;
+    				    case 3:
+    				    	btn_3.setImageResource(set_number[2]);
+    				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+    					    break;
+    				    case 4:
+    				    	btn_4.setImageResource(set_number[3]);
+    				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+    					    break;
+    				}
+    			}
+    		});
+    		switch(btn_pressed)
+			{
+			    case 1:
+			    	if(!btn_1_pressed) btn_1.startAnimation(animation);
+			    	btn_1_pressed = true;
+				    break;
+			    case 2:
+			    	if(!btn_2_pressed) btn_2.startAnimation(animation);
+			    	btn_2_pressed = true;
+				    break;
+			    case 3:
+			    	if(!btn_3_pressed) btn_3.startAnimation(animation);
+			    	btn_3_pressed = true;
+				    break;
+			    case 4:
+			    	if(!btn_4_pressed) btn_4.startAnimation(animation);
+			    	btn_4_pressed = true;
+				    break;
+			}
 		}
     };
 	//亂數排序
