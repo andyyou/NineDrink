@@ -4,7 +4,6 @@ import java.util.Random;
 
 
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Ninedrink extends Activity {
     /** Called when the activity is first created. */
@@ -44,7 +44,7 @@ public class Ninedrink extends Activity {
     //private boolean btn_3_pressed = false;
     //private boolean btn_4_pressed = false;
     //ρ家Α跑计
-    private boolean is_cheat;
+    private int cheat_mod =0; // 0:NoStatus,1:AlwaysLose,2:AlwaysWin
     private void findView(){
     	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
     	btn_2 = (ImageView)findViewById(R.id.imgbtn_2);
@@ -86,16 +86,20 @@ public class Ninedrink extends Activity {
     	@Override
 		public void onClick(View v) {
     		switch(v.getId()){
-    			case R.id.imgbtn_1:    				
+    			case R.id.imgbtn_1: 
+    				switch_cards(0);
     				btn_pressed = 1;
     				break;
-    			case R.id.imgbtn_2:  				
+    			case R.id.imgbtn_2:  
+    				switch_cards(1);
     				btn_pressed = 2;
     				break;
-    			case R.id.imgbtn_3:    				
+    			case R.id.imgbtn_3: 
+    				switch_cards(2);
     				btn_pressed = 3;
     				break;
-    			case R.id.imgbtn_4:   				
+    			case R.id.imgbtn_4:
+    				switch_cards(3);
     				btn_pressed = 4;
     				break;
     		}
@@ -112,23 +116,19 @@ public class Ninedrink extends Activity {
     			public void onAnimationEnd(Animation animation) {
     				switch(btn_pressed)
     				{
-    				    case 1:
-    				    	switch_cards(0);
+    				    case 1:    	
     				    	btn_1.setImageResource(set_number[0]);
     				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 2:
-    				    	switch_cards(1);
     				    	btn_2.setImageResource(set_number[1]);
     				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 3:
-    				    	switch_cards(2);
     				    	btn_3.setImageResource(set_number[2]);
     				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 4:
-    				    	switch_cards(3);
     				    	btn_4.setImageResource(set_number[3]);
     				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
@@ -222,16 +222,18 @@ public class Ninedrink extends Activity {
     //ρ家Α:菏钮秖
    @Override
    public boolean onKeyDown(int keyCode,KeyEvent event){   
-	   if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-		   is_cheat = true;
+	   if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){	   
+		   cheat_mod = 1; //Always lose
+	   }else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+		   cheat_mod = 2; //Always win
 	   }else{
-		   is_cheat = false;
+		   cheat_mod = 0;//Cancel
 	   }
-	   return is_cheat;
+	   return true;
    }
    public void switch_cards(int n){
 	   int switch_tmp;
-	   if(is_cheat){
+	   if(cheat_mod == 1){
 		   if(set_number[n] != R.drawable.icon_9 && is_btn_pressed[n] == false  ){
 				 for(int i=0;i<4;i++){
 					 if(is_btn_pressed[i] == false && set_number[i] == R.drawable.icon_9 && i!=n){
@@ -242,6 +244,23 @@ public class Ninedrink extends Activity {
 					 }
 				 }
 		   }			   	   
+	   }else if(cheat_mod == 2){
+		   if(set_number[n] == R.drawable.icon_9 && is_btn_pressed[n] == false  ){
+				 for(int i=0;i<4;i++){
+					 if(is_btn_pressed[i] == false && set_number[i] != R.drawable.icon_9 && i!=n){
+						 switch_tmp = set_number[n];
+						 set_number[n] = set_number[i] ;
+						 set_number[i] = switch_tmp;
+						 break;
+					 }
+				 }
+		   }		
 	   }else{}
    }
+   /*//代刚癟
+   private void openTestDialog(){
+		Toast popup =  Toast.makeText(Ninedrink.this, R.string.about_title, Toast.LENGTH_SHORT);
+	    popup.show();
+	}
+	*/
 }
