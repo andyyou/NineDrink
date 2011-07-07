@@ -225,7 +225,7 @@ public class Ninedrink extends Activity {
 	   if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){	   
 		   cheat_mod = 1; //Always lose
 	   }else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-		   cheat_mod = 2; //Always win
+		   cheat_mod = 2; //Always win and Plus Drink XD
 	   }else{
 		   cheat_mod = 0;//Cancel
 	   }
@@ -245,9 +245,9 @@ public class Ninedrink extends Activity {
 				 }
 		   }			   	   
 	   }else if(cheat_mod == 2){
-		   if(set_number[n] == R.drawable.icon_9 && is_btn_pressed[n] == false  ){
+		   if(set_number[n] != R.drawable.icon_7 && is_btn_pressed[n] == false  ){
 				 for(int i=0;i<4;i++){
-					 if(is_btn_pressed[i] == false && set_number[i] != R.drawable.icon_9 && i!=n){
+					 if(is_btn_pressed[i] == false && set_number[i] == R.drawable.icon_7 && i!=n){
 						 switch_tmp = set_number[n];
 						 set_number[n] = set_number[i] ;
 						 set_number[i] = switch_tmp;
