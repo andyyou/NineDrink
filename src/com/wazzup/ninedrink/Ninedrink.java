@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,11 +39,12 @@ public class Ninedrink extends Activity {
     private int[] set_number; 
     //用來判斷是否已翻開
     private int btn_pressed;
-    private boolean btn_1_pressed = false;
-    private boolean btn_2_pressed = false;
-    private boolean btn_3_pressed = false;
-    private boolean btn_4_pressed = false;
-    
+    private boolean[] is_btn_pressed = {false,false,false,false};
+    //private boolean btn_2_pressed = false;
+    //private boolean btn_3_pressed = false;
+    //private boolean btn_4_pressed = false;
+    //老千模式變數
+    private boolean is_cheat;
     private void findView(){
     	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
     	btn_2 = (ImageView)findViewById(R.id.imgbtn_2);
@@ -67,10 +69,15 @@ public class Ninedrink extends Activity {
 			btn_2.setImageResource(R.drawable.selector);
 			btn_3.setImageResource(R.drawable.selector);
 			btn_4.setImageResource(R.drawable.selector);
+			for(int i=0;i<4;i++){
+				is_btn_pressed[i]=false;
+			}
+			/*
 			btn_1_pressed = false;
 			btn_2_pressed = false;
 			btn_3_pressed = false;
 			btn_4_pressed = false;
+			*/
 			set_number = getRandom();	
 		}
     };
@@ -79,23 +86,20 @@ public class Ninedrink extends Activity {
     	@Override
 		public void onClick(View v) {
     		switch(v.getId()){
-    			case R.id.imgbtn_1:
-    				//btn_1.setImageResource(set_number[0]);
+    			case R.id.imgbtn_1:    				
     				btn_pressed = 1;
     				break;
-    			case R.id.imgbtn_2:
-    				//btn_2.setImageResource(set_number[1]);
+    			case R.id.imgbtn_2:  				
     				btn_pressed = 2;
     				break;
-    			case R.id.imgbtn_3:
-    				//btn_3.setImageResource(set_number[2]);
+    			case R.id.imgbtn_3:    				
     				btn_pressed = 3;
     				break;
-    			case R.id.imgbtn_4:
-    				//btn_4.setImageResource(set_number[3]);
+    			case R.id.imgbtn_4:   				
     				btn_pressed = 4;
     				break;
     		}
+    		
     		Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
     		animation.setAnimationListener(new Animation.AnimationListener() {
     			@Override
@@ -109,18 +113,22 @@ public class Ninedrink extends Activity {
     				switch(btn_pressed)
     				{
     				    case 1:
+    				    	switch_cards(0);
     				    	btn_1.setImageResource(set_number[0]);
     				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 2:
+    				    	switch_cards(1);
     				    	btn_2.setImageResource(set_number[1]);
     				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 3:
+    				    	switch_cards(2);
     				    	btn_3.setImageResource(set_number[2]);
     				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
     				    case 4:
+    				    	switch_cards(3);
     				    	btn_4.setImageResource(set_number[3]);
     				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     					    break;
@@ -130,20 +138,20 @@ public class Ninedrink extends Activity {
     		switch(btn_pressed)
 			{
 			    case 1:
-			    	if(!btn_1_pressed) btn_1.startAnimation(animation);
-			    	btn_1_pressed = true;
+			    	if(!is_btn_pressed[0]) btn_1.startAnimation(animation);
+			    	is_btn_pressed[0]= true;
 				    break;
 			    case 2:
-			    	if(!btn_2_pressed) btn_2.startAnimation(animation);
-			    	btn_2_pressed = true;
+			    	if(!is_btn_pressed[1]) btn_2.startAnimation(animation);
+			    	is_btn_pressed[1] = true;
 				    break;
 			    case 3:
-			    	if(!btn_3_pressed) btn_3.startAnimation(animation);
-			    	btn_3_pressed = true;
+			    	if(!is_btn_pressed[2]) btn_3.startAnimation(animation);
+			    	is_btn_pressed[2] = true;
 				    break;
 			    case 4:
-			    	if(!btn_4_pressed) btn_4.startAnimation(animation);
-			    	btn_4_pressed = true;
+			    	if(!is_btn_pressed[3]) btn_4.startAnimation(animation);
+			    	is_btn_pressed[3] = true;
 				    break;
 			}
 		}
@@ -211,5 +219,29 @@ public class Ninedrink extends Activity {
 			finish();	
 		}  	
     };
-    
+    //老千模式:監聽音量建
+   @Override
+   public boolean onKeyDown(int keyCode,KeyEvent event){   
+	   if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+		   is_cheat = true;
+	   }else{
+		   is_cheat = false;
+	   }
+	   return is_cheat;
+   }
+   public void switch_cards(int n){
+	   int switch_tmp;
+	   if(is_cheat){
+		   if(set_number[n] != R.drawable.icon_9 && is_btn_pressed[n] == false  ){
+				 for(int i=0;i<4;i++){
+					 if(is_btn_pressed[i] == false && set_number[i] == R.drawable.icon_9 && i!=n){
+						 switch_tmp = set_number[n];
+						 set_number[n] = set_number[i] ;
+						 set_number[i] = switch_tmp;
+						 break;
+					 }
+				 }
+		   }			   	   
+	   }else{}
+   }
 }
