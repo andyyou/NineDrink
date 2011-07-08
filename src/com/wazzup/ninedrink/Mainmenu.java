@@ -143,11 +143,12 @@ public class Mainmenu extends Activity {
 	    	}
 	    	//加入系統預設資料
 	    	for(int i=0;i<14;i++){
-	    		ContentValues values = new ContentValues(); 
-		    	values.put(String.valueOf(cboxId[i]), poker_list[i]); 
-		    	mOpenHelper.getReadableDatabase().insert(TABLE_NAME, 
-		    			"", values); 
-		    	mOpenHelper.getReadableDatabase().close();     		
+	    		String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+	    		try{
+	    		db.execSQL(sql_set_default);
+	    		}catch (SQLException e) {
+		    		setTitle("資料表建立失敗");
+		    	}
 	    	}
 	    }
 	   //選取資料
