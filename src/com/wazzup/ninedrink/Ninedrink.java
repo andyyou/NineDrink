@@ -206,8 +206,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent i = new Intent();
-			i.setClassName("com.wazzup.ninedrink.Mainmenu",
-            "com.wazzup.ninedrink.Mainmenu");
+			i.setClass(Ninedrink.this, Mainmenu.class);
 			startActivity(i);
 		}
     	

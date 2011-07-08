@@ -57,13 +57,28 @@ public final class R {
         public static final int selector_start=0x7f020026;
     }
     public static final class id {
+        public static final int blank=0x7f060014;
         public static final int btn_reset=0x7f060003;
+        public static final int btn_setcancel=0x7f060016;
+        public static final int btn_setcomplete=0x7f060015;
+        public static final int checkBox0=0x7f060013;
+        public static final int checkBox1=0x7f060006;
+        public static final int checkBox10=0x7f06000f;
+        public static final int checkBox11=0x7f060010;
+        public static final int checkBox12=0x7f060011;
+        public static final int checkBox13=0x7f060012;
+        public static final int checkBox2=0x7f060007;
+        public static final int checkBox3=0x7f060008;
+        public static final int checkBox4=0x7f060009;
+        public static final int checkBox5=0x7f06000a;
+        public static final int checkBox6=0x7f06000b;
+        public static final int checkBox7=0x7f06000c;
+        public static final int checkBox8=0x7f06000d;
+        public static final int checkBox9=0x7f06000e;
+        public static final int checkBoxAll=0x7f060005;
         public static final int imgbtn_1=0x7f060001;
         public static final int imgbtn_close=0x7f060004;
         public static final int imgbtn_set=0x7f060002;
-        public static final int imgbtn_setting=0x7f060007;
-        public static final int imgbtn_start=0x7f060006;
-        public static final int relativeLayout1=0x7f060005;
         public static final int show_msg=0x7f060000;
     }
     public static final class layout {
