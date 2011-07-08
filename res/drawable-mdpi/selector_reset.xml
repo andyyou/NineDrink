@@ -14,5 +14,5 @@
 	android:drawable="@drawable/icon_reset_dark" />
 	
 <item android:drawable="@drawable/icon_reset" />
-
+ 
 </selector>

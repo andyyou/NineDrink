@@ -34,25 +34,17 @@ public class Ninedrink extends Activity implements SensorEventListener  {
         findView();
         otherObject();
         setLisenter();  
-        shake();
-        
-        
+        shake();   
     }
+    //所有變數宣告
     private ImageView btn_1;
-    private ImageView btn_2;
-    private ImageView btn_3;
-    private ImageView btn_4;
     private ImageView btn_reset;
     private ImageView btn_close;
     private int[] set_number; 
     //用來判斷是否已翻開
-    private int btn_pressed;
-    private boolean[] is_btn_pressed = {false,false,false,false};
-    //private boolean btn_2_pressed = false;
-    //private boolean btn_3_pressed = false;
-    //private boolean btn_4_pressed = false;
+    private boolean is_btn_pressed = false;
     //老千模式變數
-    private int cheat_mod =0; // 0:NoStatus,1:AlwaysLose,2:AlwaysWin
+    private int cheat_mod = 0; // 0:NoStatus,1:AlwaysLose,2:AlwaysWin
     //偵測搖晃
     private static final int MIN_FORCE = 10;
     private static final int MIN_DIRECTION_CHANGE = 3;
@@ -77,10 +69,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
         mShakeListener = listener;
     }
     private void findView(){
-    	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
-    	btn_2 = (ImageView)findViewById(R.id.imgbtn_2);
-    	btn_3 = (ImageView)findViewById(R.id.imgbtn_3);
-    	btn_4 = (ImageView)findViewById(R.id.imgbtn_4);
+    	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
     	btn_reset = (ImageView)findViewById(R.id.btn_reset); 	
     	btn_close = (ImageView)findViewById(R.id.imgbtn_close);
     }
@@ -88,9 +77,6 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     	btn_reset.setOnClickListener(reset);
     	btn_close.setOnClickListener(close);
     	btn_1.setOnClickListener(open);
-    	btn_2.setOnClickListener(open);
-    	btn_3.setOnClickListener(open);
-    	btn_4.setOnClickListener(open);
     }
     private void otherObject(){
     	mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
@@ -164,12 +150,8 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     //重構洗牌事件
     private void reset_card(){
     	btn_1.setImageResource(R.drawable.selector);
-		btn_2.setImageResource(R.drawable.selector);
-		btn_3.setImageResource(R.drawable.selector);
-		btn_4.setImageResource(R.drawable.selector);
-		for(int i=0;i<4;i++){
-			is_btn_pressed[i]=false;
-		}
+		is_btn_pressed = false;	
+		cheat_mod = 0; //還原預設值
 		/*
 		btn_1_pressed = false;
 		btn_2_pressed = false;
@@ -177,31 +159,13 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 		btn_4_pressed = false;
 		*/
 		set_number = getRandom();
-		mVibrator.vibrate(1000);
+		mVibrator.vibrate(500);
     }
     //翻牌事件
     private View.OnClickListener open = new View.OnClickListener(){
     	@Override
 		public void onClick(View v) {
-    		switch(v.getId()){
-    			case R.id.imgbtn_1: 
-    				switch_cards(0);
-    				btn_pressed = 1;
-    				
-    				break;
-    			case R.id.imgbtn_2:  
-    				switch_cards(1);
-    				btn_pressed = 2;
-    				break;
-    			case R.id.imgbtn_3: 
-    				switch_cards(2);
-    				btn_pressed = 3;
-    				break;
-    			case R.id.imgbtn_4:
-    				switch_cards(3);
-    				btn_pressed = 4;
-    				break;
-    		}
+    		switch_cards(0);
     		
     		Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
     		animation.setAnimationListener(new Animation.AnimationListener() {
@@ -213,61 +177,24 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     			
     			@Override
     			public void onAnimationEnd(Animation animation) {
-    				switch(btn_pressed)
-    				{
-    				    case 1:    	
-    				    	btn_1.setImageResource(set_number[0]);
-    				    	btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	break;
-    				    case 2:
-    				    	btn_2.setImageResource(set_number[1]);
-    				    	btn_2.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	break;
-    				    case 3:
-    				    	btn_3.setImageResource(set_number[2]);
-    				    	btn_3.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	break;
-    				    case 4:
-    				    	btn_4.setImageResource(set_number[3]);
-    				    	btn_4.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
-    				    	break;
-    				}
+    				  btn_1.setImageResource(set_number[0]);
+    				  btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     			}
     		});
-    		switch(btn_pressed)
-			{
-			    case 1:
-			    	if(!is_btn_pressed[0]) btn_1.startAnimation(animation);
-			    	call_v(0);
-			    	is_btn_pressed[0]= true;
-				    break;
-			    case 2:
-			    	if(!is_btn_pressed[1]) btn_2.startAnimation(animation);
-			    	call_v(1);
-			    	is_btn_pressed[1] = true;
-				    break;
-			    case 3:
-			    	if(!is_btn_pressed[2]) btn_3.startAnimation(animation);
-			    	call_v(2);
-			    	is_btn_pressed[2] = true;
-				    break;
-			    case 4:
-			    	if(!is_btn_pressed[3]) btn_4.startAnimation(animation);
-			    	call_v(3);
-			    	is_btn_pressed[3] = true;
-				    break;
-			}
+			if(!is_btn_pressed) btn_1.startAnimation(animation);
+			call_v(0);
+			is_btn_pressed= true;
 		}
     };
 	//亂數排序
     private int[] getRandom(){
     		//初始化
-    		int x[] = {R.drawable.icon_7,R.drawable.icon_8,R.drawable.icon_9,R.drawable.icon_p};
+    		int x[] = {R.drawable.icon_7,R.drawable.icon_8,R.drawable.icon_9,R.drawable.icon_1,R.drawable.icon_jocker};
     		int y, tmp;
             Random r = new Random(System.currentTimeMillis()); 
             //洗牌
-            for(int i=0;i<4;i++){
-            	y = r.nextInt(3);
+            for(int i=0;i<5;i++){
+            	y = r.nextInt(4);
             	tmp = x[i];
             	x[i] = x[y];
             	x[y] = tmp;
@@ -331,33 +258,18 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 	   }else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
 		   cheat_mod = 2; //Always win and Plus Drink XD
 	   }else{
-		   cheat_mod = 0;//Cancel
+		   cheat_mod = 0; //Cancel
 	   }
 	   return true;
    }
    public void switch_cards(int n){
-	   int switch_tmp;
 	   if(cheat_mod == 1){
-		   if(set_number[n] != R.drawable.icon_9 && is_btn_pressed[n] == false  ){
-				 for(int i=0;i<4;i++){
-					 if(is_btn_pressed[i] == false && set_number[i] == R.drawable.icon_9 && i!=n){
-						 switch_tmp = set_number[n];
-						 set_number[n] = set_number[i] ;
-						 set_number[i] = switch_tmp;
-						 break;
-					 }
-				 }
+		   if(set_number[n] != R.drawable.icon_9 && is_btn_pressed == false  ){
+						 set_number[n] = R.drawable.icon_9;
 		   }			   	   
 	   }else if(cheat_mod == 2){
-		   if(set_number[n] != R.drawable.icon_7 && is_btn_pressed[n] == false  ){
-				 for(int i=0;i<4;i++){
-					 if(is_btn_pressed[i] == false && set_number[i] == R.drawable.icon_7 && i!=n){
-						 switch_tmp = set_number[n];
-						 set_number[n] = set_number[i] ;
-						 set_number[i] = switch_tmp;
-						 break;
-					 }
-				 }
+		   if(set_number[n] != R.drawable.icon_7 && is_btn_pressed == false  ){
+			   set_number[n] = R.drawable.icon_7;	 
 		   }		
 	   }else{}
    }

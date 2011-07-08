@@ -16,32 +16,34 @@ public final class R {
     }
     public static final class drawable {
         public static final int icon=0x7f020000;
-        public static final int icon_7=0x7f020001;
-        public static final int icon_8=0x7f020002;
-        public static final int icon_9=0x7f020003;
-        public static final int icon_android=0x7f020004;
-        public static final int icon_android_dark=0x7f020005;
-        public static final int icon_android_light=0x7f020006;
-        public static final int icon_close=0x7f020007;
-        public static final int icon_close_dark=0x7f020008;
-        public static final int icon_close_light=0x7f020009;
-        public static final int icon_facebook=0x7f02000a;
-        public static final int icon_p=0x7f02000b;
-        public static final int icon_reset=0x7f02000c;
-        public static final int icon_reset_dark=0x7f02000d;
-        public static final int icon_reset_light=0x7f02000e;
-        public static final int limpid=0x7f020012;
-        public static final int selector=0x7f02000f;
-        public static final int selector_close=0x7f020010;
-        public static final int selector_reset=0x7f020011;
+        public static final int icon_1=0x7f020001;
+        public static final int icon_7=0x7f020002;
+        public static final int icon_8=0x7f020003;
+        public static final int icon_9=0x7f020004;
+        public static final int icon_android=0x7f020005;
+        public static final int icon_android_dark=0x7f020006;
+        public static final int icon_android_light=0x7f020007;
+        public static final int icon_bg=0x7f020008;
+        public static final int icon_bg_dark=0x7f020009;
+        public static final int icon_bg_light=0x7f02000a;
+        public static final int icon_close=0x7f02000b;
+        public static final int icon_close_dark=0x7f02000c;
+        public static final int icon_close_light=0x7f02000d;
+        public static final int icon_facebook=0x7f02000e;
+        public static final int icon_jocker=0x7f02000f;
+        public static final int icon_p=0x7f020010;
+        public static final int icon_reset=0x7f020011;
+        public static final int icon_reset_dark=0x7f020012;
+        public static final int icon_reset_light=0x7f020013;
+        public static final int limpid=0x7f020017;
+        public static final int selector=0x7f020014;
+        public static final int selector_close=0x7f020015;
+        public static final int selector_reset=0x7f020016;
     }
     public static final class id {
-        public static final int btn_reset=0x7f060006;
-        public static final int imgbtn_1=0x7f060002;
-        public static final int imgbtn_2=0x7f060003;
-        public static final int imgbtn_3=0x7f060004;
-        public static final int imgbtn_4=0x7f060005;
-        public static final int imgbtn_close=0x7f060001;
+        public static final int btn_reset=0x7f060002;
+        public static final int imgbtn_1=0x7f060001;
+        public static final int imgbtn_close=0x7f060003;
         public static final int show_msg=0x7f060000;
     }
     public static final class layout {
