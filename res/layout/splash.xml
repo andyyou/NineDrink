@@ -8,7 +8,7 @@
 		<TextView android:id="@+id/show_msg"
     		android:layout_width="fill_parent"
     		android:layout_height="20px"
-    		android:text="設定：選取加入隨機牌庫-Select Into Poker"
+    		android:text="設定：選取加入隨機牌庫-Select Into Pokers"
     		android:layout_span="3"
 		/>
 	</TableRow>
@@ -16,7 +16,7 @@
 		<CheckBox android:id="@+id/checkBoxAll" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 全選-All "
+			android:text=" Select All "
 			android:layout_span="3" ></CheckBox>
 	</TableRow>
 	<TableRow>
@@ -92,11 +92,11 @@
     		android:text=""
 		/>
 		<Button android:id="@+id/btn_setcomplete" 
-			android:text="確認-Done" 
+			android:text="Done" 
 		 	android:layout_width="wrap_content" 
 		 	android:layout_height="wrap_content"></Button>
 		<Button android:id="@+id/btn_setcancel" 
-			android:text="取消-Cancel"  
+			android:text="Cancel"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"></Button>
 		

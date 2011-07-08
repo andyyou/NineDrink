@@ -4,12 +4,15 @@ package com.wazzup.ninedrink;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -25,6 +28,8 @@ public class Mainmenu extends Activity {
 	      createTable();
 	   }
 	   //宣告
+	   private Button btn_cancel;
+	   private Button btn_done;
 	   private CheckBox[] cbox_poker = new CheckBox[14] ;
 	   private boolean[] poker_list ={false,false,false,false,false,false,false,false,false,false,false,false,false,false};
 	   private CheckBox cbox_s ;
@@ -68,11 +73,36 @@ public class Mainmenu extends Activity {
 		   for(int i=0;i<14;i++){
 			   cbox_poker[i] = (CheckBox)findViewById(cboxId[i]);
 		   }
+		   btn_cancel = (Button)findViewById(R.id.btn_setcancel);
+		   btn_done = (Button)findViewById(R.id.btn_setcomplete);
 	   }
 	   //偵聽
 	   private void setListener(){
-		   cbox_s.setOnCheckedChangeListener(selected);
+		   cbox_s.setOnCheckedChangeListener(selectAll);
+		   btn_cancel.setOnClickListener(setcancel);
+		   for(int i=0;i<14;i++){
+			   cbox_poker[i].setOnCheckedChangeListener(selected);
+		   }
 	   }
+	   private Button.OnClickListener setcancel = new Button.OnClickListener() {
+	    	public void onClick(View v) {
+	    		finish();
+			}
+	    };
+	   private CheckBox.OnCheckedChangeListener selectAll= new CheckBox.OnCheckedChangeListener(){
+			   @Override
+			   public void onCheckedChanged(CompoundButton btnView, boolean isChecked) {
+				   if(isChecked){
+					   for(int i=0;i<14;i++){
+						   cbox_poker[i].setChecked(true);
+					   }
+				   }else{
+					   for(int i=0;i<14;i++){
+						   cbox_poker[i].setChecked(false);
+					   }
+				   }
+			   }
+		};
 	   private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
 	   {
 		   @Override
@@ -82,6 +112,7 @@ public class Mainmenu extends Activity {
 				   for(int i=0;i<14;i++){
 					   if(cboxId[i] == btnView.getId()){
 						   poker_list[i] = true;
+						   
 						   break;
 					   }
 				   }
@@ -112,48 +143,16 @@ public class Mainmenu extends Activity {
 	    	}
 	    	//加入系統預設資料
 	    	for(int i=0;i<14;i++){
-	    		String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", " +poker_list[i] + ");";
-	    		
-	    	}
-	    	
-
-	    }
-
-	    //刪除資料表
-	    public void dropTable() {
-	    	SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-	    	String SQL = "drop table " + TABLE_NAME;
-	    	Log.i("Test:dropTable = ", SQL);
-	    	try {
-	    		db.execSQL(SQL);
-	    		setTitle("資料表刪除成功");
-	    	} catch (SQLException e) {
-	    		setTitle("資料表刪除失敗");
+	    		ContentValues values = new ContentValues(); 
+		    	values.put(String.valueOf(cboxId[i]), poker_list[i]); 
+		    	mOpenHelper.getReadableDatabase().insert(TABLE_NAME, 
+		    			"", values); 
+		    	mOpenHelper.getReadableDatabase().close();     		
 	    	}
 	    }
-
-	    //插入資料列
-	    public void insertItem() {
-	    	
-
-	    	SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-	    	String sql1 = "insert into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values('People1', 'I test android');";
-	        String sql2 = "insert into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values('People2', 'I test android too');";
-	        String sql3 = "insert into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values('People3', 'I test android three times');";
-	        String sql4 = "insert into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values('People4', '" + SYS_DATE + "');";
-	        Log.i("Test:insertRecord", "");
-	        try {
-	            db.execSQL(sql1);
-	            db.execSQL(sql2);
-	            db.execSQL(sql3);
-	            db.execSQL(sql4);
-	            setTitle("插入四筆資料成功");
-	        } catch (SQLException e) {
-	            setTitle("插入四筆資料失敗");
-	        }
-	    }
-
-	    //刪除一筆資料
+	   //選取資料
+	   	
+	   //刪除一筆資料
 	    public void deleteItem() {
 	    	Log.i("Test:deleteRecord", "");
 	    	try {
