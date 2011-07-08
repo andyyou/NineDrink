@@ -191,12 +191,12 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     			
     			@Override
     			public void onAnimationEnd(Animation animation) {
-    				  btn_1.setImageResource(set_number[0]);
-    				  btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+    				
+    				btn_1.setImageResource(set_number[0]);				  
+    				btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
     			}
     		});
 			if(!is_btn_pressed) btn_1.startAnimation(animation);
-			call_v(0);
 			is_btn_pressed= true;
 		}
     };
@@ -278,14 +278,18 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     //老千模式:監聽音量建
    @Override
    public boolean onKeyDown(int keyCode,KeyEvent event){   
+	   boolean x;
 	   if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){	   
 		   cheat_mod = 1; //Always lose
+		   x=true;
 	   }else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
 		   cheat_mod = 2; //Always win and Plus Drink XD
+		   x=true;
 	   }else{
 		   cheat_mod = 0; //Cancel
+		   x=false;
 	   }
-	   return true;
+	   return x;
    }
    public void switch_cards(int n){
 	   if(cheat_mod == 1){
@@ -298,6 +302,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 		   }		
 	   }else{}
    }
+   
    //輸了震動
    private void call_v(int n){
 	   if (set_number[n] == R.drawable.icon_9){

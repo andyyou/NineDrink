@@ -1,10 +1,8 @@
 package com.wazzup.ninedrink;
 
 
-import java.util.Calendar;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -92,15 +90,9 @@ public class Mainmenu extends Activity {
 	   private CheckBox.OnCheckedChangeListener selectAll= new CheckBox.OnCheckedChangeListener(){
 			   @Override
 			   public void onCheckedChanged(CompoundButton btnView, boolean isChecked) {
-				   if(isChecked){
-					   for(int i=0;i<14;i++){
-						   cbox_poker[i].setChecked(true);
-					   }
-				   }else{
-					   for(int i=0;i<14;i++){
-						   cbox_poker[i].setChecked(false);
-					   }
-				   }
+				   for(int i=0;i<14;i++){
+					   cbox_poker[i].setChecked(isChecked);
+					}
 			   }
 		};
 	   private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
@@ -143,11 +135,12 @@ public class Mainmenu extends Activity {
 	    	}
 	    	//加入系統預設資料
 	    	for(int i=0;i<14;i++){
-	    		ContentValues values = new ContentValues(); 
-		    	values.put(String.valueOf(cboxId[i]), poker_list[i]); 
-		    	mOpenHelper.getReadableDatabase().insert(TABLE_NAME, 
-		    			"", values); 
-		    	mOpenHelper.getReadableDatabase().close();     		
+	    		String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+	    		try{
+	    		db.execSQL(sql_set_default);
+	    		}catch (SQLException e) {
+		    		setTitle("資料表建立失敗");
+		    	}
 	    	}
 	    }
 	   //選取資料
