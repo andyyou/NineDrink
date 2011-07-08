@@ -40,6 +40,7 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     private ImageView btn_1;
     private ImageView btn_reset;
     private ImageView btn_close;
+    private ImageView btn_set;
     private int[] set_number; 
     //用來判斷是否已翻開
     private boolean is_btn_pressed = false;
@@ -72,11 +73,13 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     	btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
     	btn_reset = (ImageView)findViewById(R.id.btn_reset); 	
     	btn_close = (ImageView)findViewById(R.id.imgbtn_close);
+    	btn_set = (ImageView)findViewById(R.id.imgbtn_set);
     }
     private void setLisenter(){
     	btn_reset.setOnClickListener(reset);
     	btn_close.setOnClickListener(close);
     	btn_1.setOnClickListener(open);
+    	btn_set.setOnClickListener(setting);
     }
     private void otherObject(){
     	mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
@@ -149,15 +152,26 @@ public class Ninedrink extends Activity implements SensorEventListener  {
     };
     //重構洗牌事件
     private void reset_card(){
-    	btn_1.setImageResource(R.drawable.selector);
+    	if(is_btn_pressed){
+    	Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
+    	animation.setAnimationListener(new Animation.AnimationListener() {
+    		@Override
+			public void onAnimationStart(Animation animation) { }
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) { }
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				  btn_1.setImageResource(R.drawable.selector);
+				  btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
+				}
+    		});
+    		btn_1.startAnimation(animation);
+    	}
 		is_btn_pressed = false;	
 		cheat_mod = 0; //還原預設值
-		/*
-		btn_1_pressed = false;
-		btn_2_pressed = false;
-		btn_3_pressed = false;
-		btn_4_pressed = false;
-		*/
+		
 		set_number = getRandom();
 		mVibrator.vibrate(500);
     }
@@ -185,6 +199,18 @@ public class Ninedrink extends Activity implements SensorEventListener  {
 			call_v(0);
 			is_btn_pressed= true;
 		}
+    };
+    //進入設定
+    private View.OnClickListener setting = new View.OnClickListener(){
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent i = new Intent();
+			i.setClassName("com.wazzup.ninedrink.Mainmenu",
+            "com.wazzup.ninedrink.Mainmenu");
+			startActivity(i);
+		}
+    	
     };
 	//亂數排序
     private int[] getRandom(){
