@@ -27,6 +27,7 @@ public class Settings extends Activity {
 		setCboxDefault();
 		mOpenHelper = new DatebaseHelper(this);
 		createTable();
+		getData();
 	}
 	//宣告
 	private Button btn_cancel;
@@ -92,7 +93,6 @@ public class Settings extends Activity {
 				updateItem(cboxId[i], poker_list[i]);
 			}
 			finish();
-			
 		}
 	};
 	private Button.OnClickListener setcancel = new Button.OnClickListener() {
@@ -133,7 +133,7 @@ public class Settings extends Activity {
 	}*/
 	//建立資料表
 	public void createTable() {
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		/*SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
 			" int not null, " + BODY + " boolean not null " + ");";
 		try {
@@ -151,9 +151,28 @@ public class Settings extends Activity {
 			}catch (SQLException e) {
 				setTitle("資料表建立失敗");
 			}
-		}
+		}*/
 	}
 	//選取資料
+	public void getData() {
+		int i = 0;
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		Cursor result = db.rawQuery("Select * from " + TABLE_NAME, null);
+		result.moveToFirst();
+		while (!result.isAfterLast()) {
+			if(cboxId[i] == result.getInt(0)) {
+				poker_list[i] = Boolean.valueOf(result.getString(1));
+			}
+			i++;
+			result.moveToNext();
+		}
+		String list = "";
+		for(i = 0; i < 14; i++) {
+			cbox_poker[i].setChecked(poker_list[i]);
+			list += String.valueOf(poker_list[i]);
+		}
+		setTitle(list);
+	}
 
 	//更新一筆資料
 	public void updateItem(int poker_number ,boolean is_into) {
