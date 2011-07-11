@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="*"
+    >
+	<TableRow>
+		<TextView android:id="@+id/show_msg"
+    		android:layout_width="fill_parent"
+    		android:layout_height="20px"
+    		android:text="設定：選取加入隨機牌庫-Select Into Pokers"
+    		android:layout_span="3"
+		/>
+	</TableRow>
+	<TableRow>
+		<CheckBox android:id="@+id/checkBoxAll" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" Select All "
+			android:layout_span="3" ></CheckBox>
+	</TableRow>
+	<TableRow>
+		<CheckBox android:id="@+id/checkBox1" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" A " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox2" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 2 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox3" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 3 " ></CheckBox>
+	</TableRow>
+	<TableRow>	
+		<CheckBox android:id="@+id/checkBox4" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 4 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox5" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 5 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox6" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 6 " ></CheckBox>
+	</TableRow>
+	<TableRow>
+		<CheckBox android:id="@+id/checkBox7" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 7 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox8" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 8 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox9" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 9 " ></CheckBox>
+	</TableRow>
+	<TableRow>
+		<CheckBox android:id="@+id/checkBox10" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" 10 " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox11" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" J " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox12" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" Q " ></CheckBox>
+	</TableRow>
+	<TableRow>
+		<CheckBox android:id="@+id/checkBox13" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" K " ></CheckBox>
+		<CheckBox android:id="@+id/checkBox0" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text=" Joker " ></CheckBox>		
+	</TableRow>
+	<TableRow>
+		<TextView android:id="@+id/blank"
+    		android:layout_width="fill_parent"
+    		android:layout_height="20px"
+    		android:text=""
+		/>
+		<Button android:id="@+id/btn_setcomplete" 
+			android:text="Done" 
+		 	android:layout_width="wrap_content" 
+		 	android:layout_height="wrap_content"></Button>
+		<Button android:id="@+id/btn_setcancel" 
+			android:text="Cancel"  
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"></Button>
+		
+	</TableRow>
+</TableLayout>
+
+ 
+
