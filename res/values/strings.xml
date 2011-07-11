@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="btn_reset"> 洗牌 \n Reset </string>
-    <string name="app_name">NineDrink</string>
-    <string name="lb_homepage">BLog</string>
-    <string name="url_homepage">http://blog.faq-book.com</string>
-    <string name="about_title">關於NienDrink</string>
-    <string name="about_msg">NineDrink遊戲\n 飲酒時的小品遊戲。\n 作者：Andy Eddy</string>
-</resources>

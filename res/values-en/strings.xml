@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_reset"> Shuffle </string>
+    <string name="setting_title">Setting：Select poker what you want.</string>
+    <string name="select_all">Select/Deselect All</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="app_name">NineDrink</string>
+    <string name="lb_homepage">Blog</string>
+    <string name="url_homepage">http://blog.faq-book.com</string>
+    <string name="about_title">About NienDrink</string>
+    <string name="about_msg">NineDrink\n A popular drinking game.\n Author：Andy Eddy</string>
+</resources>

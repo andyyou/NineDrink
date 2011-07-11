@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_reset"> 洗牌 </string>
+    <string name="setting_title">设定：选取加入随机牌库</string>
+    <string name="select_all">全选/取消全选</string>
+    <string name="done">完成</string>
+    <string name="cancel">取消</string>
+    <string name="app_name">NineDrink</string>
+    <string name="lb_homepage">Blog</string>
+    <string name="url_homepage">http://blog.faq-book.com</string>
+    <string name="about_title">关于 NienDrink</string>
+    <string name="about_msg">NineDrink\n 饮酒时的小品游戏。\n 作者：Andy Eddy</string>
+</resources>
