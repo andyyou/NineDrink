@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,6 +24,7 @@ public class Settings extends Activity {
 		setContentView(R.layout.settings);
 		findView();
 		setListener();
+		setCboxDefault();
 		mOpenHelper = new DatebaseHelper(this);
 		createTable();
 	}
@@ -82,7 +84,17 @@ public class Settings extends Activity {
 		for(int i = 0; i < 14; i++) {
 			cbox_poker[i].setOnCheckedChangeListener(selected);
 		}
+		btn_done.setOnClickListener(setdone);
 	}
+	private Button.OnClickListener setdone = new Button.OnClickListener() {
+		public void onClick(View v) {
+			for(int i=0;i<14;i++){
+				updateItem(cboxId[i], poker_list[i]);
+			}
+			finish();
+			
+		}
+	};
 	private Button.OnClickListener setcancel = new Button.OnClickListener() {
 		public void onClick(View v) {
 			finish();
@@ -109,7 +121,16 @@ public class Settings extends Activity {
 			}
 		}
 	};
-
+	
+	private void setCboxDefault(){
+		
+	}
+	// 取得所有記錄
+	/*
+	public Cursor getAll() {
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+	    return db.rawQuery("SELECT * FROM table_name", null);
+	}*/
 	//建立資料表
 	public void createTable() {
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
@@ -134,15 +155,15 @@ public class Settings extends Activity {
 	}
 	//選取資料
 
-	//刪除一筆資料
-	public void deleteItem() {
-		Log.i("Test:deleteRecord", "");
+	//更新一筆資料
+	public void updateItem(int poker_number ,boolean is_into) {
 		try {
 			SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-			db.delete(TABLE_NAME, " title = 'People1'", null);
-			setTitle("刪除 title 為 People1 的一筆資料");
+			ContentValues args = new ContentValues();
+			args.put("is_into", is_into);
+			db.update("set_poker", args, "poker_number = "+ String.valueOf(poker_number) , null);
 		} catch (SQLException e) {
-			setTitle("刪除資料失敗");
+			setTitle("更新資料失敗");
 		}
 	}
 }
