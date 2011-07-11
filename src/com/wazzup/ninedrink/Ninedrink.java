@@ -205,7 +205,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent i = new Intent();
-			i.setClass(Ninedrink.this, Mainmenu.class);
+			i.setClass(Ninedrink.this, Settings.class);
 			startActivity(i);
 		}
 	};

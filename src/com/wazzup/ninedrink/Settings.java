@@ -15,12 +15,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class Mainmenu extends Activity {
+public class Settings extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.splash);
+		setContentView(R.layout.settings);
 		findView();
 		setListener();
 		mOpenHelper = new DatebaseHelper(this);
