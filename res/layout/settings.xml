@@ -1,107 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="*"
-    >
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:stretchColumns="*"
+	>
 	<TableRow>
 		<TextView android:id="@+id/show_msg"
-    		android:layout_width="fill_parent"
-    		android:layout_height="20px"
-    		android:text="設定：選取加入隨機牌庫-Select Into Pokers"
-    		android:layout_span="3"
+			android:layout_width="fill_parent"
+			android:layout_height="20px"
+			android:text="@string/setting_title"
+			android:layout_span="3"
 		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBoxAll" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" Select All "
-			android:layout_span="3" ></CheckBox>
+			android:text="@string/select_all"
+			android:layout_span="3"
+		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox1" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" A " ></CheckBox>
+			android:text=" A "
+		/>
 		<CheckBox android:id="@+id/checkBox2" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 2 " ></CheckBox>
+			android:text=" 2 "
+		/>
 		<CheckBox android:id="@+id/checkBox3" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 3 " ></CheckBox>
+			android:text=" 3 "
+		/>
 	</TableRow>
-	<TableRow>	
+	<TableRow>
 		<CheckBox android:id="@+id/checkBox4" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 4 " ></CheckBox>
+			android:text=" 4 "
+		/>
 		<CheckBox android:id="@+id/checkBox5" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 5 " ></CheckBox>
+			android:text=" 5 "
+		/>
 		<CheckBox android:id="@+id/checkBox6" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 6 " ></CheckBox>
+			android:text=" 6 "
+		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox7" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 7 " ></CheckBox>
+			android:text=" 7 "
+		/>
 		<CheckBox android:id="@+id/checkBox8" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 8 " ></CheckBox>
+			android:text=" 8 "
+		/>
 		<CheckBox android:id="@+id/checkBox9" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 9 " ></CheckBox>
+			android:text=" 9 "
+		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox10" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 10 " ></CheckBox>
+			android:text=" 10 "
+		/>
 		<CheckBox android:id="@+id/checkBox11" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" J " ></CheckBox>
+			android:text=" J "
+		/>
 		<CheckBox android:id="@+id/checkBox12" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" Q " ></CheckBox>
+			android:text=" Q "
+		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox13" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" K " ></CheckBox>
+			android:text=" K "
+		/>
 		<CheckBox android:id="@+id/checkBox0" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" Joker " ></CheckBox>		
+			android:text=" Joker "
+		/>
 	</TableRow>
 	<TableRow>
 		<TextView android:id="@+id/blank"
-    		android:layout_width="fill_parent"
-    		android:layout_height="20px"
-    		android:text=""
+			android:layout_width="fill_parent"
+			android:layout_height="20px"
+			android:text=""
 		/>
 		<Button android:id="@+id/btn_setcomplete" 
-			android:text="Done" 
-		 	android:layout_width="wrap_content" 
-		 	android:layout_height="wrap_content"></Button>
-		<Button android:id="@+id/btn_setcancel" 
-			android:text="Cancel"  
+			android:text="@string/done" 
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"></Button>
-		
+			android:layout_height="wrap_content"
+		/>
+		<Button android:id="@+id/btn_setcancel" 
+			android:text="@string/cancel"  
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+		/>
 	</TableRow>
 </TableLayout>
-
- 
-
