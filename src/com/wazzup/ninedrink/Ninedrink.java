@@ -313,7 +313,6 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		}
 	}
 	//亂數排序
-
 	private int[] getRandom() {
 		//初始化
 		Object in[] = pokerList.toArray();
