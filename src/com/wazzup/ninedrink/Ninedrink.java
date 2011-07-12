@@ -302,7 +302,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		while (!result.isAfterLast()){
 			i = result.getInt(0);
 			if(Boolean.valueOf(result.getString(1).equals("1"))){
-				pokerList.add(pokerId[i]);
+				pokerList.add(pokerPic[i]);
 			}else{}
 			result.moveToNext();
 		}
