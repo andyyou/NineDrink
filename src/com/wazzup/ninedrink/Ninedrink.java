@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -61,6 +62,8 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	private Ninedrink mSensorListener;
 	//Vibrator物件
 	private Vibrator mVibrator;
+	//音效物件
+	private MediaPlayer mp;
 	//搖晃介面
 	public interface OnShakeListener {
 		void onShake();
@@ -72,6 +75,9 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
+		
+		//設定其他物件
+		mp = MediaPlayer.create(getBaseContext(), R.raw.dealsound);
 	}
 	private void setLisenter() {
 		btn_close.setOnClickListener(close);
@@ -193,6 +199,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			});
 			if(!is_btn_pressed){
 				btn_1.startAnimation(animation);
+			    mp.start();
 				call_v(0);
 				is_btn_pressed= true;
 			}

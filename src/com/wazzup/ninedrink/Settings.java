@@ -155,12 +155,12 @@ public class Settings extends Activity {
 				try{
 				db.execSQL(sql_set_default);
 				}catch (SQLException e){
-					setTitle("資料表建立失敗");
+					//setTitle("資料表建立失敗");
 				}
 			}
-			setTitle("資料表成功重建");
+			//setTitle("資料表成功重建");
 		} catch (SQLException e){
-			setTitle("資料表重建失敗");
+			//setTitle("資料表重建失敗");
 		}
 		
 	}
