@@ -194,9 +194,16 @@ public class Ninedrink extends Activity implements SensorEventListener {
 					btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
 				}
 			});
-			if(!is_btn_pressed) btn_1.startAnimation(animation);
-			call_v(0);
-			is_btn_pressed= true;
+			if(!is_btn_pressed){
+				btn_1.startAnimation(animation);
+				call_v(0);
+				is_btn_pressed= true;
+			}
+			else{
+				reset_card();
+			}
+			
+			
 		}
 	};
 	//進入設定
