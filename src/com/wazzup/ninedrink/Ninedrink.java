@@ -395,11 +395,15 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	public void switch_cards(int n) {
 		if(cheat_mod == 1) {
 			if(set_number[n] != R.drawable.icon_9 && is_btn_pressed == false) {
-				set_number[n] = R.drawable.icon_9;
+				if(pokerList.indexOf(pokerPic[9])>0){
+					set_number[n] = R.drawable.icon_9;
+				}else{}
 			}
 		}else if(cheat_mod == 2) {
 			if(set_number[n] != R.drawable.icon_7 && is_btn_pressed == false) {
-				set_number[n] = R.drawable.icon_7;
+				if(pokerList.indexOf(pokerPic[7])>0){
+					set_number[n] = R.drawable.icon_7;
+				}else{}
 			}
 		}else{}
 	}
