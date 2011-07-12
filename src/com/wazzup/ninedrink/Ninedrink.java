@@ -1,6 +1,10 @@
 package com.wazzup.ninedrink;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import com.wazzup.ninedrink.Settings.DatebaseHelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,6 +12,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -16,6 +24,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,10 +69,72 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	private OnShakeListener mShakeListener;
 	private SensorManager mSensorManager;
 	private Ninedrink mSensorListener;
-	//Vibrator物件
+	//震動物件
 	private Vibrator mVibrator;
+	//牌庫
+	private int[] pokerPic = {
+			R.drawable.icon_jocker,R.drawable.icon_1,R.drawable.icon_2,
+			R.drawable.icon_3,R.drawable.icon_4,R.drawable.icon_5,
+			R.drawable.icon_6,R.drawable.icon_7,R.drawable.icon_8,
+			R.drawable.icon_9,R.drawable.icon_10,R.drawable.icon_11,
+			R.drawable.icon_12,R.drawable.icon_13
+		};
+	private List<Integer> pokerList =new ArrayList<Integer>();
+	private String x_source;
 	//音效物件
 	private MediaPlayer mp;
+	//資料庫宣告
+	private static final String DATABASE_NAME = "NdDb.db";
+	private static final int DATABASE_VERSION = 1;
+	private static final String TABLE_NAME = "set_poker";
+	private static final String TITLE = "poker_number";
+	private static final String BODY = "is_into";
+	//設定資料庫
+	DatebaseHelper mOpenHelper;
+
+	private static class DatebaseHelper extends SQLiteOpenHelper {
+		DatebaseHelper(Context context){
+			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		}
+
+		@Override
+		public void onCreate(SQLiteDatabase db){
+			String sql = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
+				" text not null, " + BODY + " boolean not null " + ");";
+			try{
+				db.execSQL(sql);
+			}catch(SQLException e){
+				Log.i("Test:createDB = ", e.toString());
+			}
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
+	}
+	//建立資料表
+	public void createTable(){
+		int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
+			" int not null, " + BODY + " boolean not null " + ");";
+		try {
+			//db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+			db.execSQL(SQL);
+			//加入系統預設資料
+			for(int i = 0; i < 14; i++){
+				//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
+				try{
+				db.execSQL(sql_set_default);
+				}catch (SQLException e){
+					//Get Exception Message
+				}
+			}
+		} catch (SQLException e){
+			//Get Exception Message
+		}
+		
+	}
 	//搖晃介面
 	public interface OnShakeListener {
 		void onShake();
@@ -78,6 +149,8 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		
 		//設定其他物件
 		mp = MediaPlayer.create(getBaseContext(), R.raw.dealsound);
+		
+		
 	}
 	private void setLisenter() {
 		btn_close.setOnClickListener(close);
@@ -220,15 +293,29 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			startActivity(i);
 		}
 	};
+	//設定牌庫
+	private void setPokers(){
+		int i = 0;
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		Cursor result = db.rawQuery("Select * from " + TABLE_NAME, null);
+		result.moveToFirst();
+		while (!result.isAfterLast()){
+			i = result.getInt(0);
+			if(Boolean.valueOf(result.getString(1).equals("1"))){
+				pokerList.add(pokerId[i]);
+			}else{}
+			result.moveToNext();
+		}
+	}
 	//亂數排序
 	private int[] getRandom() {
 		//初始化
-		int x[] = {R.drawable.icon_7,R.drawable.icon_8,R.drawable.icon_9,R.drawable.icon_1,R.drawable.icon_jocker};
-		int y, tmp;
+		int x[] = pokerList.toArray();	
+		int tmp,y;
 		Random r = new Random(System.currentTimeMillis());
 		//洗牌
-		for(int i = 0; i < 5; i++) {
-			y = r.nextInt(4);
+		for(int i = 0; i < x.length; i++) {
+			y = r.nextInt(x.length-1);
 			tmp = x[i];
 			x[i] = x[y];
 			x[y] = tmp;
