@@ -146,22 +146,23 @@ public class Settings extends Activity {
 		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
 			" int not null, " + BODY + " boolean not null " + ");";
 		try {
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+			//db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL(SQL);
+			//加入系統預設資料
+			for(int i = 0; i < 14; i++){
+				//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", 0);";
+				try{
+				db.execSQL(sql_set_default);
+				}catch (SQLException e){
+					setTitle("資料表建立失敗");
+				}
+			}
 			setTitle("資料表成功重建");
 		} catch (SQLException e){
 			setTitle("資料表重建失敗");
 		}
-		//加入系統預設資料
-		for(int i = 0; i < 14; i++){
-			//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
-			String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", 0);";
-			try{
-			db.execSQL(sql_set_default);
-			}catch (SQLException e){
-				setTitle("資料表建立失敗");
-			}
-		}
+		
 	}
 	//選取資料
 

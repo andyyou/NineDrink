@@ -38,7 +38,6 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 	//所有變數宣告
 	private ImageView btn_1;
-	private ImageView btn_reset;
 	private ImageView btn_close;
 	private ImageView btn_set;
 	private int[] set_number;
@@ -71,12 +70,10 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 	private void findView() {
 		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
-		btn_reset = (ImageView)findViewById(R.id.btn_reset);
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
 	}
 	private void setLisenter() {
-		btn_reset.setOnClickListener(reset);
 		btn_close.setOnClickListener(close);
 		btn_1.setOnClickListener(open);
 		btn_set.setOnClickListener(setting);
