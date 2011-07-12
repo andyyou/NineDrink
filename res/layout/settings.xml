@@ -24,80 +24,80 @@
 		<CheckBox android:id="@+id/checkBox1" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" A "
+			android:text="A"
 		/>
 		<CheckBox android:id="@+id/checkBox2" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 2 "
+			android:text="2"
 		/>
 		<CheckBox android:id="@+id/checkBox3" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 3 "
+			android:text="3"
 		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox4" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 4 "
+			android:text="4"
 		/>
 		<CheckBox android:id="@+id/checkBox5" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 5 "
+			android:text="5"
 		/>
 		<CheckBox android:id="@+id/checkBox6" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 6 "
+			android:text="6"
 		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox7" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 7 "
+			android:text="7"
 		/>
 		<CheckBox android:id="@+id/checkBox8" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 8 "
+			android:text="8"
 		/>
 		<CheckBox android:id="@+id/checkBox9" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 9 "
+			android:text="9"
 		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox10" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" 10 "
+			android:text="10"
 		/>
 		<CheckBox android:id="@+id/checkBox11" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" J "
+			android:text="J"
 		/>
 		<CheckBox android:id="@+id/checkBox12" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" Q "
+			android:text="Q"
 		/>
 	</TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox13" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" K "
+			android:text="K"
 		/>
 		<CheckBox android:id="@+id/checkBox0" 
 			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content" 
-			android:text=" Joker "
+			android:text="Joker"
 		/>
 	</TableRow>
 	<TableRow>
