@@ -5,6 +5,7 @@
     <string name="select_all">全選/取消全選</string>
     <string name="done">完成</string>
     <string name="cancel">取消</string>
+    <string name="limit_msg">請至少選取兩張牌</string>
     <string name="app_name">NineDrink</string>
     <string name="lb_homepage">Blog</string>
     <string name="url_homepage">http://blog.faq-book.com</string>
