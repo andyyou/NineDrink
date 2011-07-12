@@ -89,10 +89,19 @@ public class Settings extends Activity {
 	}
 	private Button.OnClickListener setdone = new Button.OnClickListener(){
 		public void onClick(View v){
+			int selectCount = 0;
 			for(int i = 0; i < 14; i++){
-				updateItem(i, poker_list[i]);
+				if(cbox_poker[i].isChecked())
+					selectCount++;
 			}
-			finish();
+			if(selectCount < 2){
+				setTitle(R.string.limit_msg);
+			} else {
+				for(int i = 0; i < 14; i++){
+					updateItem(i, poker_list[i]);
+				}
+				finish();
+			}
 		}
 	};
 	private Button.OnClickListener setcancel = new Button.OnClickListener(){
