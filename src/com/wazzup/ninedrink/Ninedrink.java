@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
@@ -39,6 +41,8 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		mOpenHelper = new DatebaseHelper(this);
+		createTable();
 		setPokers();
 		set_number = getRandom();
 		findView();
@@ -309,11 +313,11 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		}
 	}
 	//亂數排序
-	@SuppressWarnings("null")
+
 	private int[] getRandom() {
 		//初始化
 		Object in[] = pokerList.toArray();
-		int x[] = null;    
+		int x[] = new int[in.length];    
 		int tmp,y;
 		Random r = new Random(System.currentTimeMillis());
 		//洗牌
