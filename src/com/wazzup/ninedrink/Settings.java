@@ -142,6 +142,7 @@ public class Settings extends Activity {
 
 	//建立資料表
 	public void createTable(){
+		int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
 			" int not null, " + BODY + " boolean not null " + ");";
@@ -151,7 +152,7 @@ public class Settings extends Activity {
 			//加入系統預設資料
 			for(int i = 0; i < 14; i++){
 				//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
-				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", 0);";
+				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
 				try{
 				db.execSQL(sql_set_default);
 				}catch (SQLException e){
