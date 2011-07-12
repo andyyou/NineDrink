@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.wazzup.ninedrink.Settings.DatebaseHelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -40,6 +39,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		setPokers();
 		set_number = getRandom();
 		findView();
 		otherObject();
@@ -80,7 +80,6 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			R.drawable.icon_12,R.drawable.icon_13
 		};
 	private List<Integer> pokerList =new ArrayList<Integer>();
-	private String x_source;
 	//音效物件
 	private MediaPlayer mp;
 	//資料庫宣告
@@ -219,12 +218,14 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		});
 	}
 	//洗牌事件
+	/*
 	private View.OnClickListener reset = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			reset_card();
 		}
 	};
+	*/
 	//重構洗牌事件
 	private void reset_card() {
 		if(is_btn_pressed) {
@@ -308,17 +309,22 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		}
 	}
 	//亂數排序
+	@SuppressWarnings("null")
 	private int[] getRandom() {
 		//初始化
-		int x[] = pokerList.toArray();	
+		Object in[] = pokerList.toArray();
+		int x[] = null;    
 		int tmp,y;
 		Random r = new Random(System.currentTimeMillis());
 		//洗牌
+		for(int i = 0; i < in.length; i++) {
+		       x[i] = ((Integer)in[i]).intValue();
+		}
 		for(int i = 0; i < x.length; i++) {
-			y = r.nextInt(x.length-1);
-			tmp = x[i];
-			x[i] = x[y];
-			x[y] = tmp;
+		   y = r.nextInt(x.length-1);
+		   tmp = x[i];
+		   x[i] = x[y];
+		   x[y] = tmp;
 		}
 		return x;
 	}
