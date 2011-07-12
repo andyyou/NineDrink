@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -100,7 +101,10 @@ public class Settings extends Activity {
 				for(int i = 0; i < 14; i++){
 					updateItem(i, poker_list[i]);
 				}
-				finish();
+				//finish(); //如果只有finish()返回db不會從拉，設定不會及時。
+				Intent i = new Intent();
+				i.setClass(Settings.this, Ninedrink.class);
+				startActivity(i);
 			}
 		}
 	};
