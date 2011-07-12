@@ -19,7 +19,7 @@ import android.widget.CompoundButton;
 public class Settings extends Activity {
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 		findView();
@@ -27,7 +27,7 @@ public class Settings extends Activity {
 		setCboxDefault();
 		mOpenHelper = new DatebaseHelper(this);
 		createTable();
-		getData();
+		getAll();
 	}
 	//宣告
 	private Button btn_cancel;
@@ -51,59 +51,59 @@ public class Settings extends Activity {
 	DatebaseHelper mOpenHelper;
 
 	private static class DatebaseHelper extends SQLiteOpenHelper {
-		DatebaseHelper(Context context) {
+		DatebaseHelper(Context context){
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		}
 
 		@Override
-		public void onCreate(SQLiteDatabase db) {
+		public void onCreate(SQLiteDatabase db){
 			String sql = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
 				" text not null, " + BODY + " boolean not null " + ");";
 			try{
 				db.execSQL(sql);
-			}catch(SQLException e) {
+			}catch(SQLException e){
 				Log.i("Test:createDB = ", e.toString());
 			}
 		}
 
 		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
 	}
 	//設定各物件
-	private void findView() {
+	private void findView(){
 		cbox_s = (CheckBox)findViewById(R.id.checkBoxAll);
-		for(int i = 0; i < 14; i++) {
+		for(int i = 0; i < 14; i++){
 			cbox_poker[i] = (CheckBox)findViewById(cboxId[i]);
 		}
 		btn_cancel = (Button)findViewById(R.id.btn_setcancel);
 		btn_done = (Button)findViewById(R.id.btn_setcomplete);
 	}
 	//偵聽
-	private void setListener() {
+	private void setListener(){
 		cbox_s.setOnCheckedChangeListener(selectAll);
 		btn_cancel.setOnClickListener(setcancel);
-		for(int i = 0; i < 14; i++) {
+		for(int i = 0; i < 14; i++){
 			cbox_poker[i].setOnCheckedChangeListener(selected);
 		}
 		btn_done.setOnClickListener(setdone);
 	}
-	private Button.OnClickListener setdone = new Button.OnClickListener() {
-		public void onClick(View v) {
-			for(int i=0;i<14;i++){
-				updateItem(cboxId[i], poker_list[i]);
+	private Button.OnClickListener setdone = new Button.OnClickListener(){
+		public void onClick(View v){
+			for(int i = 0; i < 14; i++){
+				updateItem(i, poker_list[i]);
 			}
 			finish();
 		}
 	};
-	private Button.OnClickListener setcancel = new Button.OnClickListener() {
-		public void onClick(View v) {
+	private Button.OnClickListener setcancel = new Button.OnClickListener(){
+		public void onClick(View v){
 			finish();
 		}
 	};
-	private CheckBox.OnCheckedChangeListener selectAll= new CheckBox.OnCheckedChangeListener() {
+	private CheckBox.OnCheckedChangeListener selectAll= new CheckBox.OnCheckedChangeListener(){
 		@Override
-			public void onCheckedChanged(CompoundButton btnView, boolean isChecked) {
-				for(int i = 0; i < 14; i++) {
+			public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
+				for(int i = 0; i < 14; i++){
 					cbox_poker[i].setChecked(isChecked);
 				}
 		   }
@@ -111,10 +111,10 @@ public class Settings extends Activity {
 	private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
 	{
 		@Override
-		public void onCheckedChanged(CompoundButton btnView, boolean isChecked) {
+		public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
 			// TODO Auto-generated method stub
-			for(int i = 0; i < 14; i++) {
-				if(cboxId[i] == btnView.getId()) {
+			for(int i = 0; i < 14; i++){
+				if(cboxId[i] == btnView.getId()){
 					poker_list[i] = isChecked;
 					break;
 				}
@@ -125,63 +125,54 @@ public class Settings extends Activity {
 	private void setCboxDefault(){
 		
 	}
+
 	// 取得所有記錄
-	/*
-	public Cursor getAll() {
+	public void getAll(){
+		int i = 0;
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-	    return db.rawQuery("SELECT * FROM table_name", null);
-	}*/
+		Cursor result = db.rawQuery("Select * from " + TABLE_NAME, null);
+		result.moveToFirst();
+		while (!result.isAfterLast()){
+			i = result.getInt(0);
+			poker_list[i] = Boolean.valueOf(result.getString(1).equals("0") ? "false" : "true");
+			cbox_poker[i].setChecked(poker_list[i]);
+			result.moveToNext();
+		}
+	}
+
 	//建立資料表
-	public void createTable() {
-		/*SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+	public void createTable(){
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
 			" int not null, " + BODY + " boolean not null " + ");";
 		try {
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL(SQL);
 			setTitle("資料表成功重建");
-		} catch (SQLException e) {
+		} catch (SQLException e){
 			setTitle("資料表重建失敗");
 		}
 		//加入系統預設資料
-		for(int i = 0; i < 14; i++) {
-			String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+		for(int i = 0; i < 14; i++){
+			//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+			String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", 0);";
 			try{
 			db.execSQL(sql_set_default);
-			}catch (SQLException e) {
+			}catch (SQLException e){
 				setTitle("資料表建立失敗");
 			}
-		}*/
+		}
 	}
 	//選取資料
-	public void getData() {
-		int i = 0;
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		Cursor result = db.rawQuery("Select * from " + TABLE_NAME, null);
-		result.moveToFirst();
-		while (!result.isAfterLast()) {
-			if(cboxId[i] == result.getInt(0)) {
-				poker_list[i] = Boolean.valueOf(result.getString(1));
-			}
-			i++;
-			result.moveToNext();
-		}
-		String list = "";
-		for(i = 0; i < 14; i++) {
-			cbox_poker[i].setChecked(poker_list[i]);
-			list += String.valueOf(poker_list[i]);
-		}
-		setTitle(list);
-	}
 
 	//更新一筆資料
-	public void updateItem(int poker_number ,boolean is_into) {
+	public void updateItem(int poker_number ,boolean is_into){
 		try {
 			SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 			ContentValues args = new ContentValues();
 			args.put("is_into", is_into);
 			db.update("set_poker", args, "poker_number = "+ String.valueOf(poker_number) , null);
-		} catch (SQLException e) {
+		} catch (SQLException e){
 			setTitle("更新資料失敗");
 		}
 	}
