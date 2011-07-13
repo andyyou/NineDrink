@@ -129,6 +129,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
 				try{
 				db.execSQL(sql_set_default);
+				Log.i(DATABASE_NAME, "建立成功");
 				}catch (SQLException e){
 					//Get Exception Message
 				}
