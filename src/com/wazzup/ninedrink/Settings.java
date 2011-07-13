@@ -33,9 +33,10 @@ public class Settings extends Activity {
 	//宣告
 	private Button btn_cancel;
 	private Button btn_done;
+	private Button btn_selectall ;
+	private boolean is_selected_all = false;
 	private CheckBox[] cbox_poker = new CheckBox[14] ;
 	private boolean[] poker_list ={false,false,false,false,false,false,false,false,false,false,false,false,false,false};
-	private CheckBox cbox_s ;
 	private int[] cboxId = {
 		R.id.checkBox0,R.id.checkBox1,R.id.checkBox2,
 		R.id.checkBox3,R.id.checkBox4,R.id.checkBox5,
@@ -72,21 +73,21 @@ public class Settings extends Activity {
 	}
 	//設定各物件
 	private void findView(){
-		cbox_s = (CheckBox)findViewById(R.id.checkBoxAll);
 		for(int i = 0; i < 14; i++){
 			cbox_poker[i] = (CheckBox)findViewById(cboxId[i]);
 		}
 		btn_cancel = (Button)findViewById(R.id.btn_setcancel);
 		btn_done = (Button)findViewById(R.id.btn_setcomplete);
+		btn_selectall = (Button)findViewById(R.id.btn_selectall);
 	}
 	//偵聽
 	private void setListener(){
-		cbox_s.setOnCheckedChangeListener(selectAll);
 		btn_cancel.setOnClickListener(setcancel);
 		for(int i = 0; i < 14; i++){
 			cbox_poker[i].setOnCheckedChangeListener(selected);
 		}
 		btn_done.setOnClickListener(setdone);
+		btn_selectall.setOnClickListener(selectAll);
 	}
 	private Button.OnClickListener setdone = new Button.OnClickListener(){
 		public void onClick(View v){
@@ -105,6 +106,7 @@ public class Settings extends Activity {
 				Intent i = new Intent();
 				i.setClass(Settings.this, Ninedrink.class);
 				startActivity(i);
+				finish();
 			}
 		}
 	};
@@ -113,7 +115,18 @@ public class Settings extends Activity {
 			finish();
 		}
 	};
-	private CheckBox.OnCheckedChangeListener selectAll= new CheckBox.OnCheckedChangeListener(){
+	private Button.OnClickListener selectAll = new Button.OnClickListener(){
+		public void onClick(View v){
+			is_selected_all = !(is_selected_all);
+			if(is_selected_all) btn_selectall.setText(R.string.select_cancelall);
+			else btn_selectall.setText(R.string.select_all);
+			for(int i = 0; i < 14; i++){
+				cbox_poker[i].setChecked(is_selected_all);
+			}
+		}
+	};
+	/*
+	private CheckBox.OnCheckedChangeListener selectAll_cbox= new CheckBox.OnCheckedChangeListener(){
 		@Override
 			public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
 				for(int i = 0; i < 14; i++){
@@ -121,6 +134,7 @@ public class Settings extends Activity {
 				}
 		   }
 	};
+	*/
 	private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
 	{
 		@Override

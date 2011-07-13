@@ -2,7 +2,8 @@
 <resources>
     <string name="btn_reset"> Shuffle </string>
     <string name="setting_title">Setting：Select poker what you want.</string>
-    <string name="select_all">Select/Deselect All</string>
+    <string name="select_all">Select</string>
+     <string name="select_cancelall">Deselect All</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
     <string name="limit_msg">Please at least select two poker.</string>

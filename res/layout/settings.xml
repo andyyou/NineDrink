@@ -12,14 +12,7 @@
 			android:layout_span="3"
 		/>
 	</TableRow>
-	<TableRow>
-		<CheckBox android:id="@+id/checkBoxAll" 
-			android:layout_width="fill_parent" 
-			android:layout_height="wrap_content" 
-			android:text="@string/select_all"
-			android:layout_span="3"
-		/>
-	</TableRow>
+
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox1" 
 			android:layout_width="fill_parent" 
@@ -100,11 +93,11 @@
 			android:text="Joker"
 		/>
 	</TableRow>
-	<TableRow>
-		<TextView android:id="@+id/blank"
-			android:layout_width="fill_parent"
-			android:layout_height="20px"
-			android:text=""
+	<TableRow> 
+		<Button android:id="@+id/btn_selectall" 
+			android:text="@string/select_all" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
 		/>
 		<Button android:id="@+id/btn_setcomplete" 
 			android:text="@string/done" 
