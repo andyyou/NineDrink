@@ -146,16 +146,15 @@ public class Settings extends Activity {
 	}
 	//判斷全部CheckBox是否勾選
 	public boolean validateChecked(){
-		boolean x = false;
 		for(int i=0;i<cbox_poker.length;i++){	
 			if(!cbox_poker[i].isChecked()){
-				x = false;
+				is_selected_all = false;
 				break;
 			}else{
-				x = true;
+				is_selected_all = true;
 			}
 		}
-		return x;
+		return is_selected_all;
 	}
 	//重構常用 CheckBox是否勾選 設定事件
 	public void setSelectAllBtn(){
