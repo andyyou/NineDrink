@@ -27,7 +27,7 @@ public class Settings extends Activity {
 		setListener();
 		setCboxDefault();
 		mOpenHelper = new DatebaseHelper(this);
-		createTable();
+		//createTable();
 		getAll();
 	}
 	//宣告
@@ -60,9 +60,20 @@ public class Settings extends Activity {
 		@Override
 		public void onCreate(SQLiteDatabase db){
 			String sql = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
-				" text not null, " + BODY + " boolean not null " + ");";
+				" int not null, " + BODY + " boolean not null " + ");";
 			try{
 				db.execSQL(sql);
+				//加入系統預設資料
+				int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
+				for(int i = 0; i < 14; i++){
+					//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
+					String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
+					try{
+					db.execSQL(sql_set_default);
+					}catch (SQLException e){
+						//Get Exception Message
+					}
+				}
 			}catch(SQLException e){
 				Log.i("Test:createDB = ", e.toString());
 			}
@@ -190,7 +201,6 @@ public class Settings extends Activity {
 		} catch (SQLException e){
 			//setTitle("資料表重建失敗");
 		}
-		
 	}
 	//選取資料
 
