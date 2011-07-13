@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 public class Settings extends Activity {
 	/** Called when the activity is first created. */
@@ -22,6 +23,7 @@ public class Settings extends Activity {
 		setListener();
 		mOpenHelper = new NDDBOpenHelper(this);
 		getAll();
+		setSelectAllBtn();
 	}
 
 	//宣告
@@ -71,6 +73,7 @@ public class Settings extends Activity {
 			}
 			if(selectCount < 2){
 				setTitle(R.string.limit_msg);
+				limitDialog();
 			} else {
 				for(int i = 0; i < 14; i++){
 					updateItem(i, poker_list[i]);
@@ -102,7 +105,7 @@ public class Settings extends Activity {
 	};
 
 	/*
-	private CheckBox.OnCheckedChangeListener selectAll_cbox= new CheckBox.OnCheckedChangeListener(){
+	private CheckBox.OnCheckedChangeListener is_selectAll= new CheckBox.OnCheckedChangeListener(){
 		@Override
 			public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
 				for(int i = 0; i < 14; i++){
@@ -123,6 +126,8 @@ public class Settings extends Activity {
 					break;
 				}
 			}
+			setSelectAllBtn();
+			
 		}
 	};
 
@@ -139,7 +144,24 @@ public class Settings extends Activity {
 			result.moveToNext();
 		}
 	}
-
+	//判斷全部CheckBox是否勾選
+	public boolean validateChecked(){
+		boolean x = false;
+		for(int i=0;i<cbox_poker.length;i++){	
+			if(!cbox_poker[i].isChecked()){
+				x = false;
+				break;
+			}else{
+				x = true;
+			}
+		}
+		return x;
+	}
+	//重構常用 CheckBox是否勾選 設定事件
+	public void setSelectAllBtn(){
+		if(validateChecked()) btn_selectall.setText(R.string.select_cancelall);
+		else btn_selectall.setText(R.string.select_all);
+	}
 	//更新一筆資料
 	public void updateItem(int poker_number ,boolean is_into){
 		try {
@@ -150,5 +172,9 @@ public class Settings extends Activity {
 		} catch (SQLException e){
 			setTitle("更新資料失敗");
 		}
+	}
+	private void limitDialog() {
+		Toast popup =  Toast.makeText(Settings.this, R.string.limit_msg, Toast.LENGTH_SHORT);
+		popup.show();
 	}
 }
