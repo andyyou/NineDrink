@@ -89,35 +89,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	//設定資料庫
 	public NDDBOpenHelper mOpenHelper;
 
-<<<<<<< HEAD
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
-	}
-	//建立資料表
-	public void createTable(){
-		int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE + " int not null, " + BODY + " boolean not null " + ");";
-		try {
-			//db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			db.execSQL(SQL);
-			//加入系統預設資料
-			for(int i = 0; i < 14; i++){
-				//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
-				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
-				try{
-				db.execSQL(sql_set_default);
-				Log.i(DATABASE_NAME, "建立成功");
-				}catch (SQLException e){
-					//Get Exception Message
-				}
-			}
-		} catch (SQLException e){
-			//Get Exception Message
-		}
-	}
-=======
->>>>>>> 206475b7e85d1ab19674d72f99e5fb04d68ef6b4
+
 	//搖晃介面
 	public interface OnShakeListener {
 		void onShake();
