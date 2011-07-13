@@ -3,6 +3,7 @@ package com.wazzup.ninedrink;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
@@ -80,7 +81,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			R.drawable.icon_6,R.drawable.icon_7,R.drawable.icon_8,
 			R.drawable.icon_9,R.drawable.icon_10,R.drawable.icon_11,
 			R.drawable.icon_12,R.drawable.icon_13
-		};
+	};
 	private List<Integer> pokerList = new ArrayList<Integer>();
 
 	//音效物件

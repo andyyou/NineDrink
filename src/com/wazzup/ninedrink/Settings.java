@@ -1,17 +1,12 @@
 package com.wazzup.ninedrink;
 
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,11 +20,10 @@ public class Settings extends Activity {
 		setContentView(R.layout.settings);
 		findView();
 		setListener();
-		setCboxDefault();
-		mOpenHelper = new DatebaseHelper(this);
-		//createTable();
+		mOpenHelper = new NDDBOpenHelper(this);
 		getAll();
 	}
+
 	//宣告
 	private Button btn_cancel;
 	private Button btn_done;
@@ -44,44 +38,10 @@ public class Settings extends Activity {
 		R.id.checkBox9,R.id.checkBox10,R.id.checkBox11,
 		R.id.checkBox12,R.id.checkBox13
 	};
-	private static final String DATABASE_NAME = "NdDb.db";
-	private static final int DATABASE_VERSION = 1;
-	private static final String TABLE_NAME = "set_poker";
-	private static final String TITLE = "poker_number";
-	private static final String BODY = "is_into";
+
 	//設定資料庫
-	DatebaseHelper mOpenHelper;
+	public NDDBOpenHelper mOpenHelper;
 
-	private static class DatebaseHelper extends SQLiteOpenHelper {
-		DatebaseHelper(Context context){
-			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		}
-
-		@Override
-		public void onCreate(SQLiteDatabase db){
-			String sql = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
-				" int not null, " + BODY + " boolean not null " + ");";
-			try{
-				db.execSQL(sql);
-				//加入系統預設資料
-				int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
-				for(int i = 0; i < 14; i++){
-					//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
-					String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
-					try{
-					db.execSQL(sql_set_default);
-					}catch (SQLException e){
-						//Get Exception Message
-					}
-				}
-			}catch(SQLException e){
-				Log.i("Test:createDB = ", e.toString());
-			}
-		}
-
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
-	}
 	//設定各物件
 	private void findView(){
 		for(int i = 0; i < 14; i++){
@@ -91,6 +51,7 @@ public class Settings extends Activity {
 		btn_done = (Button)findViewById(R.id.btn_setcomplete);
 		btn_selectall = (Button)findViewById(R.id.btn_selectall);
 	}
+
 	//偵聽
 	private void setListener(){
 		btn_cancel.setOnClickListener(setcancel);
@@ -100,6 +61,7 @@ public class Settings extends Activity {
 		btn_done.setOnClickListener(setdone);
 		btn_selectall.setOnClickListener(selectAll);
 	}
+
 	private Button.OnClickListener setdone = new Button.OnClickListener(){
 		public void onClick(View v){
 			int selectCount = 0;
@@ -121,11 +83,13 @@ public class Settings extends Activity {
 			}
 		}
 	};
+
 	private Button.OnClickListener setcancel = new Button.OnClickListener(){
 		public void onClick(View v){
 			finish();
 		}
 	};
+
 	private Button.OnClickListener selectAll = new Button.OnClickListener(){
 		public void onClick(View v){
 			is_selected_all = !(is_selected_all);
@@ -136,6 +100,7 @@ public class Settings extends Activity {
 			}
 		}
 	};
+
 	/*
 	private CheckBox.OnCheckedChangeListener selectAll_cbox= new CheckBox.OnCheckedChangeListener(){
 		@Override
@@ -146,6 +111,7 @@ public class Settings extends Activity {
 		   }
 	};
 	*/
+
 	private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
 	{
 		@Override
@@ -159,16 +125,12 @@ public class Settings extends Activity {
 			}
 		}
 	};
-	
-	private void setCboxDefault(){
-		
-	}
 
 	// 取得所有記錄
 	public void getAll(){
 		int i = 0;
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		Cursor result = db.rawQuery("Select * from " + TABLE_NAME, null);
+		Cursor result = db.query(Constants.TABLE_NAME, null, null, null, null, null, null);
 		result.moveToFirst();
 		while (!result.isAfterLast()){
 			i = result.getInt(0);
@@ -177,32 +139,6 @@ public class Settings extends Activity {
 			result.moveToNext();
 		}
 	}
-
-	//建立資料表
-	public void createTable(){
-		int[] initValue = {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0};
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		String SQL = "CREATE TABLE " + TABLE_NAME + " (" + TITLE +
-			" int not null, " + BODY + " boolean not null " + ");";
-		try {
-			//db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			db.execSQL(SQL);
-			//加入系統預設資料
-			for(int i = 0; i < 14; i++){
-				//String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + cboxId[i]+ ", '" + poker_list[i] + "');";
-				String sql_set_default = "Insert Into " + TABLE_NAME + " (" + TITLE + ", " + BODY + ") values(" + i + ", " + initValue[i] + ");";
-				try{
-				db.execSQL(sql_set_default);
-				}catch (SQLException e){
-					//setTitle("資料表建立失敗");
-				}
-			}
-			//setTitle("資料表成功重建");
-		} catch (SQLException e){
-			//setTitle("資料表重建失敗");
-		}
-	}
-	//選取資料
 
 	//更新一筆資料
 	public void updateItem(int poker_number ,boolean is_into){
