@@ -49,6 +49,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	private ImageView btn_1;
 	private ImageView btn_close;
 	private ImageView btn_set;
+	private ImageView btn_description;
 	private int[] set_number;
 
 	//用來判斷是否已翻開
@@ -105,7 +106,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
-
+		btn_description = (ImageView)findViewById(R.id.imgbtn_description);
 		//設定其他物件
 		mp = MediaPlayer.create(getBaseContext(), R.raw.dealsound);
 	}

@@ -11,5 +11,7 @@
     <string name="lb_homepage">Blog</string>
     <string name="url_homepage">http://blog.faq-book.com</string>
     <string name="about_title">About NienDrink</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_description">Descriptions</string>
     <string name="about_msg">NineDrink\n A popular drinking game.\n Author：Andy Eddy</string>
 </resources>

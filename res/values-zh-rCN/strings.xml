@@ -11,5 +11,7 @@
     <string name="lb_homepage">Blog</string>
     <string name="url_homepage">http://blog.faq-book.com</string>
     <string name="about_title">关于 NienDrink</string>
+    <string name="btn_back">返回</string>
+    <string name="btn_description">说明</string>
     <string name="about_msg">NineDrink\n 饮酒时的小品游戏。\n 作者：Andy Eddy</string>
 </resources>
