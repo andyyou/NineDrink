@@ -46,9 +46,13 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		
 	}
 	@Override
+	public void onPause(){
+		super.onPause();
+		pokerList.clear();
+	}
+	@Override
     protected void onRestart() {
 		super.onRestart();
-		mOpenHelper.close();
 		this.onCreate(null);
     }
 	//所有變數宣告
