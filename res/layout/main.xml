@@ -18,11 +18,19 @@
 			android:layout_width="wrap_content" 
 			android:background="@drawable/limpid"
 			android:adjustViewBounds ="true"
-			android:layout_span="2"
+			android:layout_span="3"
 			/>
 	</TableRow>
 	<TableRow> 
-		<ImageView android:id="@+id/imgbtn_set"
+		<ImageView android:id="@+id/imgbtn_description"
+			android:src="@drawable/selector_description" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:background="@drawable/limpid"
+			android:adjustViewBounds ="true"
+			android:layout_marginTop="30px"
+			/> 
+		<ImageView android:id="@+id/imgbtn_set" 
 			android:src="@drawable/selector_set" 
 			android:layout_height="wrap_content" 
 			android:layout_width="wrap_content" 
