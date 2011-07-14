@@ -42,6 +42,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		otherObject();
 		setLisenter();
 		shake();
+		
 	}
 
 	//所有變數宣告	
@@ -276,10 +277,10 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		       x[i] = ((Integer)in[i]).intValue();
 		}
 		for(int i = 0; i < x.length; i++) {
-		   y = r.nextInt(x.length-1);
-		   tmp = x[i];
-		   x[i] = x[y];
-		   x[y] = tmp;
+				y = r.nextInt(x.length);
+				tmp = x[i];
+				x[i] = x[y];
+				x[y] = tmp;
 		}
 		return x;
 	}

@@ -23,15 +23,13 @@ public class Settings extends Activity {
 		setListener();
 		mOpenHelper = new NDDBOpenHelper(this);
 		getAll();
-		getSelectedNumber();
-		setSelectAllBtn();
 	}
 
 	//宣告
 	private Button btn_cancel;
 	private Button btn_done;
 	private Button btn_selectall ;
-	private int selected_number =0;
+	private int selected_number = 0 ;
 	private boolean is_selected_all = false;
 	private CheckBox[] cbox_poker = new CheckBox[14] ;
 	private boolean[] poker_list ={false,false,false,false,false,false,false,false,false,false,false,false,false,false};
@@ -97,47 +95,30 @@ public class Settings extends Activity {
 
 	private Button.OnClickListener selectAll = new Button.OnClickListener(){
 		public void onClick(View v){
-			is_selected_all = !(is_selected_all);
-			if(is_selected_all) {
-				btn_selectall.setText(R.string.select_cancelall);
-				selected_number =14;
-			}
-			else {
-				btn_selectall.setText(R.string.select_all);
-			}
-			for(int i = 0; i < 14; i++){
-				cbox_poker[i].setChecked(is_selected_all);
-			}
+			selectAllEvent();
 		}
 	};
-
-	/*
-	private CheckBox.OnCheckedChangeListener is_selectAll= new CheckBox.OnCheckedChangeListener(){
-		@Override
-			public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
-				for(int i = 0; i < 14; i++){
-					cbox_poker[i].setChecked(isChecked);
-				}
-		   }
-	};
-	*/
+	//重構 selectAll 事件
+	public void selectAllEvent(){
+		for(int i = 0; i < 14; i++){
+			cbox_poker[i].setChecked(is_selected_all);
+		}
+	}
 
 	private CheckBox.OnCheckedChangeListener selected= new CheckBox.OnCheckedChangeListener()
 	{
 		@Override
 		public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
 			// TODO Auto-generated method stub
-			if(isChecked) selected_number++;
-			else selected_number--;
+
 			
 			for(int i = 0; i < 14; i++){
 				if(cboxId[i] == btnView.getId()){
 					poker_list[i] = isChecked;
-					setSelectAllBtn();
 					break;
-				}
+				}	
 			}	
-			
+			getSelected();
 		}
 	};
 
@@ -146,6 +127,7 @@ public class Settings extends Activity {
 		int i = 0;
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		Cursor result = db.query(Constants.TABLE_NAME, null, null, null, null, null, null);
+			
 		result.moveToFirst();
 		while (!result.isAfterLast()){
 			i = result.getInt(0);
@@ -153,26 +135,21 @@ public class Settings extends Activity {
 			cbox_poker[i].setChecked(poker_list[i]);
 			result.moveToNext();
 		}
+		getSelected();
+		
 	}
-	//判斷全部CheckBox是否勾選
-	public void getSelectedNumber(){
-		for(int i=0;i<cbox_poker.length;i++){	
-			if(cbox_poker[i].isChecked()){
-				selected_number++;
-			}else{
-				continue;
-			}
-		}
-	}
+
 	//重構常用 CheckBox是否勾選 設定事件
-	public void setSelectAllBtn(){
-		if(selected_number == 14) {
-			btn_selectall.setText(R.string.select_cancelall);
-			is_selected_all = true;
-		}
-		else {
-			btn_selectall.setText(R.string.select_all);
-			is_selected_all = false;
+	public void getSelected(){
+		for(int j=0;j<cbox_poker.length;j++){
+			if(!cbox_poker[j].isChecked()) {
+				btn_selectall.setText(R.string.select_all);
+				is_selected_all = true;
+				break;
+			}else{
+				btn_selectall.setText(R.string.select_cancelall);
+				is_selected_all = false;
+			}
 		}
 	}
 	//更新一筆資料
