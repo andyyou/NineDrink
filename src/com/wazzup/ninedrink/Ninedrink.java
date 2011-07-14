@@ -45,7 +45,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		
 	}
 
-	//所有變數宣告	
+	//所有變數宣告
 	private ImageView btn_1;
 	private ImageView btn_close;
 	private ImageView btn_set;
@@ -269,18 +269,19 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	private int[] getRandom() {
 		//初始化
 		Object in[] = pokerList.toArray();
-		int x[] = new int[in.length];    
-		int tmp,y;
+		int x[] = new int[in.length];   
+		int tmp,y,z;
 		Random r = new Random(System.currentTimeMillis());
 		//洗牌
 		for(int i = 0; i < in.length; i++) {
-		       x[i] = ((Integer)in[i]).intValue();
+			x[i] = ((Integer)in[i]).intValue();
 		}
-		for(int i = 0; i < x.length; i++) {
-				y = r.nextInt(x.length);
-				tmp = x[i];
-				x[i] = x[y];
-				x[y] = tmp;
+		for(int i = 0; i < 100; i++) {
+			y = r.nextInt(x.length);
+			z = r.nextInt(x.length);
+			tmp = x[z];
+			x[z] = x[y];
+			x[y] = tmp;
 		}
 		return x;
 	}
@@ -340,7 +341,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	//老千模式:監聽音量建
 	@Override
 	public boolean onKeyDown(int keyCode,KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {	
+		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
 			cheat_mod = 1; //Always lose
 		}else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 			cheat_mod = 2; //Always win and Plus Drink XD
