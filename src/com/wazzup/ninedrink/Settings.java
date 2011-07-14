@@ -79,9 +79,9 @@ public class Settings extends Activity {
 					updateItem(i, poker_list[i]);
 				}
 				//finish(); //如果只有finish()返回db不會從拉，設定不會及時。
-				Intent i = new Intent();
-				i.setClass(Settings.this, Ninedrink.class);
-				startActivity(i);
+				//Intent i = new Intent();
+				//i.setClass(Settings.this, Ninedrink.class);
+				//startActivity(i);
 				finish();
 			}
 		}

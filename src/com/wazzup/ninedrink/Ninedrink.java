@@ -43,8 +43,14 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		setLisenter();
 		shake();
 		
+		
 	}
-
+	@Override
+    protected void onRestart() {
+		super.onRestart();
+		mOpenHelper.close();
+		this.onCreate(null);
+    }
 	//所有變數宣告
 	private ImageView btn_1;
 	private ImageView btn_close;
