@@ -102,6 +102,7 @@ public class Settings extends Activity {
 	public void selectAllEvent(){
 		for(int i = 0; i < 14; i++){
 			cbox_poker[i].setChecked(is_selected_all);
+			poker_list[i] = is_selected_all;
 		}
 	}
 
@@ -110,14 +111,12 @@ public class Settings extends Activity {
 		@Override
 		public void onCheckedChanged(CompoundButton btnView, boolean isChecked){
 			// TODO Auto-generated method stub
-
-			
 			for(int i = 0; i < 14; i++){
 				if(cboxId[i] == btnView.getId()){
 					poker_list[i] = isChecked;
 					break;
-				}	
-			}	
+				}
+			}
 			getSelected();
 		}
 	};
@@ -152,6 +151,7 @@ public class Settings extends Activity {
 			}
 		}
 	}
+
 	//更新一筆資料
 	public void updateItem(int poker_number ,boolean is_into){
 		try {
@@ -163,6 +163,7 @@ public class Settings extends Activity {
 			setTitle("更新資料失敗");
 		}
 	}
+
 	private void limitDialog() {
 		Toast popup =  Toast.makeText(Settings.this, R.string.limit_msg, Toast.LENGTH_SHORT);
 		popup.show();
