@@ -12,9 +12,7 @@
 			android:layout_span="2"
 			>
 		</ImageView>
-		
 	</TableRow>
-
 	<TableRow>
 		<Button android:id="@+id/btn_statment" 
 			android:text="@string/btn_description"  

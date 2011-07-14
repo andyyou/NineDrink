@@ -103,7 +103,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	private void findView(){
-		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
+		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
 		btn_description = (ImageView)findViewById(R.id.imgbtn_description);
@@ -115,6 +115,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		btn_close.setOnClickListener(close);
 		btn_1.setOnClickListener(open);
 		btn_set.setOnClickListener(setting);
+		btn_description.setOnClickListener(description);
 	}
 
 	private void otherObject(){
@@ -250,7 +251,16 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			startActivity(i);
 		}
 	};
-
+	//進入說明
+	private View.OnClickListener description = new View.OnClickListener(){
+		@Override
+		public void onClick(View v){
+			// TODO Auto-generated method stub
+			Intent i = new Intent();
+			i.setClass(Ninedrink.this, Description.class);
+			startActivity(i);
+		}
+	};
 	//設定牌庫
 	private void setPokers(){
 		int i = 0;
