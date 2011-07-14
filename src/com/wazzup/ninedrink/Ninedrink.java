@@ -32,7 +32,7 @@ import android.widget.ImageView;
 public class Ninedrink extends Activity implements SensorEventListener {
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		mOpenHelper = new NDDBOpenHelper(this);
@@ -97,11 +97,11 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		void onShake();
 	}
 
-	public void setOnShakeListener(OnShakeListener listener) {
+	public void setOnShakeListener(OnShakeListener listener){
 		mShakeListener = listener;
 	}
 
-	private void findView() {
+	private void findView(){
 		btn_1 = (ImageView)findViewById(R.id.imgbtn_1);;
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
@@ -110,39 +110,39 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		mp = MediaPlayer.create(getBaseContext(), R.raw.dealsound);
 	}
 
-	private void setLisenter() {
+	private void setLisenter(){
 		btn_close.setOnClickListener(close);
 		btn_1.setOnClickListener(open);
 		btn_set.setOnClickListener(setting);
 	}
 
-	private void otherObject() {
+	private void otherObject(){
 		mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 	}
 
 	//搖晃事件相關設定
 	@Override
-	public void onSensorChanged(SensorEvent se) {
+	public void onSensorChanged(SensorEvent se){
 		float x = se.values[SensorManager.DATA_X];
 		float y = se.values[SensorManager.DATA_Y];
 		float z = se.values[SensorManager.DATA_Z];
 		float totalMovement = Math.abs(x + y + z - lastX - lastY - lastZ);
-		if (totalMovement > MIN_FORCE) {
+		if (totalMovement > MIN_FORCE){
 			long now = System.currentTimeMillis();
-			if (mFirstDirectionChangeTime == 0) {
+			if (mFirstDirectionChangeTime == 0){
 				mFirstDirectionChangeTime = now;
 				mLastDirectionChangeTime = now;
 			}
 			long lastChangeWasAgo = now - mLastDirectionChangeTime;
-			if (lastChangeWasAgo < MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE) {
+			if (lastChangeWasAgo < MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE){
 				mLastDirectionChangeTime = now;
 				mDirectionChangeCount++;
 				lastX = x;
 				lastY = y;
 				lastZ = z;
-				if (mDirectionChangeCount >= MIN_DIRECTION_CHANGE) {
+				if (mDirectionChangeCount >= MIN_DIRECTION_CHANGE){
 					long totalDuration = now - mFirstDirectionChangeTime;
-					if (totalDuration < MAX_TOTAL_DURATION_OF_SHAKE) {
+					if (totalDuration < MAX_TOTAL_DURATION_OF_SHAKE){
 						mShakeListener.onShake();
 						resetShakeParameters();
 					}
@@ -153,7 +153,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		}
 	}
 
-	private void resetShakeParameters() {
+	private void resetShakeParameters(){
 		mFirstDirectionChangeTime = 0;
 		mDirectionChangeCount = 0;
 		mLastDirectionChangeTime = 0;
@@ -163,37 +163,37 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	public void onAccuracyChanged(Sensor sensor, int accuracy){
 		// TODO Auto-generated method stub
 	}
 
 	//搖晃動作
-	private void shake() {
+	private void shake(){
 		mSensorListener = new Ninedrink();
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mSensorManager.registerListener(mSensorListener,
 		mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 			SensorManager.SENSOR_DELAY_UI);
-		mSensorListener.setOnShakeListener(new Ninedrink.OnShakeListener() {
-			public void onShake() {
+		mSensorListener.setOnShakeListener(new Ninedrink.OnShakeListener(){
+			public void onShake(){
 				reset_card();
 			}
 		});
 	}
 
 	//重構洗牌事件
-	private void reset_card() {
-		if(is_btn_pressed) {
+	private void reset_card(){
+		if(is_btn_pressed){
 		Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
-		animation.setAnimationListener(new Animation.AnimationListener() {
+		animation.setAnimationListener(new Animation.AnimationListener(){
 			@Override
-			public void onAnimationStart(Animation animation) { }
+			public void onAnimationStart(Animation animation){ }
 
 			@Override
-			public void onAnimationRepeat(Animation animation) { }
+			public void onAnimationRepeat(Animation animation){ }
 
 			@Override
-			public void onAnimationEnd(Animation animation) {
+			public void onAnimationEnd(Animation animation){
 				  btn_1.setImageResource(R.drawable.selector);
 				  btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
 				}
@@ -208,21 +208,21 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	//翻牌事件
-	private View.OnClickListener open = new View.OnClickListener() {
+	private View.OnClickListener open = new View.OnClickListener(){
 		@Override
-		public void onClick(View v) {
+		public void onClick(View v){
 			switch_cards(0);
 
 			Animation animation = AnimationUtils.loadAnimation(Ninedrink.this, R.anim.back_scale);
-			animation.setAnimationListener(new Animation.AnimationListener() {
+			animation.setAnimationListener(new Animation.AnimationListener(){
 				@Override
-				public void onAnimationStart(Animation animation) { }
+				public void onAnimationStart(Animation animation){ }
 
 				@Override
-				public void onAnimationRepeat(Animation animation) { }
+				public void onAnimationRepeat(Animation animation){ }
 
 				@Override
-				public void onAnimationEnd(Animation animation) {
+				public void onAnimationEnd(Animation animation){
 					btn_1.setImageResource(set_number[0]);
 					btn_1.startAnimation(AnimationUtils.loadAnimation(Ninedrink.this, R.anim.front_scale));
 				}
@@ -240,9 +240,9 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	};
 
 	//進入設定
-	private View.OnClickListener setting = new View.OnClickListener() {
+	private View.OnClickListener setting = new View.OnClickListener(){
 		@Override
-		public void onClick(View v) {
+		public void onClick(View v){
 			// TODO Auto-generated method stub
 			Intent i = new Intent();
 			i.setClass(Ninedrink.this, Settings.class);
@@ -266,17 +266,17 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	//亂數排序
-	private int[] getRandom() {
+	private int[] getRandom(){
 		//初始化
 		Object in[] = pokerList.toArray();
 		int x[] = new int[in.length];   
 		int tmp,y,z;
 		Random r = new Random(System.currentTimeMillis());
 		//洗牌
-		for(int i = 0; i < in.length; i++) {
+		for(int i = 0; i < in.length; i++){
 			x[i] = ((Integer)in[i]).intValue();
 		}
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < 100; i++){
 			y = r.nextInt(x.length);
 			z = r.nextInt(x.length);
 			tmp = x[z];
@@ -291,7 +291,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	protected static final int MENU_Quit = Menu.FIRST+1;
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu){
 		super.onCreateOptionsMenu(menu);
 		menu.add(0,MENU_ABOUT,0,"關於");
 		menu.add(0,MENU_Quit,0,"結束");
@@ -299,9 +299,9 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item){
 		super.onOptionsItemSelected(item);
-		switch(item.getItemId()) {
+		switch(item.getItemId()){
 		case MENU_ABOUT:
 			openOptionsDialog();
 			break;
@@ -312,15 +312,15 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		return true;
 	}
 
-	private void openOptionsDialog() {
+	private void openOptionsDialog(){
 		new AlertDialog.Builder(Ninedrink.this).setTitle(R.string.about_title)
 			.setMessage(R.string.about_msg)
-			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int i) {
+			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int i){
 				}
 			})
-			.setNegativeButton(R.string.lb_homepage, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int i) {
+			.setNegativeButton(R.string.lb_homepage, new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int i){
 					Uri uri = Uri.parse(getString(R.string.url_homepage));
 					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 					startActivity(intent);
@@ -330,9 +330,9 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	//結束程式
-	private Button.OnClickListener close = new Button.OnClickListener() {
+	private Button.OnClickListener close = new Button.OnClickListener(){
 		@Override
-		public void onClick(View v) {
+		public void onClick(View v){
 			int pid = android.os.Process.myPid();
 			android.os.Process.killProcess(pid);
 		}
@@ -340,10 +340,10 @@ public class Ninedrink extends Activity implements SensorEventListener {
 
 	//老千模式:監聽音量建
 	@Override
-	public boolean onKeyDown(int keyCode,KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+	public boolean onKeyDown(int keyCode,KeyEvent event){
+		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
 			cheat_mod = 1; //Always lose
-		}else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+		}else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
 			cheat_mod = 2; //Always win and Plus Drink XD
 		}else{
 			cheat_mod = 0; //Cancel
@@ -351,15 +351,15 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		return true;
 	}
 
-	public void switch_cards(int n) {
-		if(cheat_mod == 1) {
-			if(set_number[n] != R.drawable.icon_9 && is_btn_pressed == false) {
+	public void switch_cards(int n){
+		if(cheat_mod == 1){
+			if(set_number[n] != R.drawable.icon_9 && is_btn_pressed == false){
 				if(pokerList.indexOf(pokerPic[9]) > 0){
 					set_number[n] = R.drawable.icon_9;
 				}else{}
 			}
-		}else if(cheat_mod == 2) {
-			if(set_number[n] != R.drawable.icon_7 && is_btn_pressed == false) {
+		}else if(cheat_mod == 2){
+			if(set_number[n] != R.drawable.icon_7 && is_btn_pressed == false){
 				if(pokerList.indexOf(pokerPic[7]) > 0){
 					set_number[n] = R.drawable.icon_7;
 				}else{}
@@ -368,13 +368,13 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	//輸了震動
-	private void call_v(int n) {
-		if (set_number[n] == R.drawable.icon_9) {
+	private void call_v(int n){
+		if (set_number[n] == R.drawable.icon_9){
 			mVibrator.vibrate(500);
 		}
 	}
 	/*//測試訊息
-	private void openTestDialog() {
+	private void openTestDialog(){
 		Toast popup =  Toast.makeText(Ninedrink.this, R.string.about_title, Toast.LENGTH_SHORT);
 		popup.show();
 	}
