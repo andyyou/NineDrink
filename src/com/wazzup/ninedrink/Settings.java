@@ -121,7 +121,7 @@ public class Settings extends Activity {
 					break;
 				}
 			}
-			checkSelected();debug();
+			checkSelected();
 		}
 	};
 
