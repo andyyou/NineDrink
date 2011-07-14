@@ -98,8 +98,13 @@ public class Settings extends Activity {
 	private Button.OnClickListener selectAll = new Button.OnClickListener(){
 		public void onClick(View v){
 			is_selected_all = !(is_selected_all);
-			if(is_selected_all) btn_selectall.setText(R.string.select_cancelall);
-			else btn_selectall.setText(R.string.select_all);
+			if(is_selected_all) {
+				btn_selectall.setText(R.string.select_cancelall);
+				selected_number =14;
+			}
+			else {
+				btn_selectall.setText(R.string.select_all);
+			}
 			for(int i = 0; i < 14; i++){
 				cbox_poker[i].setChecked(is_selected_all);
 			}
