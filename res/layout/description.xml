@@ -10,13 +10,13 @@
 			android:text="@string/btn_description"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:layout_marginTop="450dip"
+			android:layout_marginTop="426dip"
 		/> 
 		<Button android:id="@+id/btn_back" 
 			android:text="@string/btn_back"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:layout_marginTop="450dip"
+			android:layout_marginTop="426dip"
 		/>
 	</TableRow>
 </TableLayout>
