@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -42,14 +41,14 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		otherObject();
 		setLisenter();
 		shake();
-		
-		
 	}
+
 	@Override
 	public void onPause(){
 		super.onPause();
 		pokerList.clear();
 	}
+
 	@Override
     protected void onRestart() {
 		super.onRestart();
@@ -261,6 +260,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			startActivity(i);
 		}
 	};
+
 	//進入說明
 	private View.OnClickListener description = new View.OnClickListener(){
 		@Override
@@ -271,11 +271,11 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			startActivity(i);
 		}
 	};
+
 	//設定牌庫
 	private void setPokers(){
 		int i = 0;
-		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-		Cursor result = db.query(Constants.TABLE_NAME, null, null, null, null, null, null);
+		Cursor result = mOpenHelper.getAll();
 		result.moveToFirst();
 		while (!result.isAfterLast()){
 			i = result.getInt(0);
