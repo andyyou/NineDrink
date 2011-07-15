@@ -50,12 +50,13 @@ public final class R {
         public static final int icon_set=0x7f020020;
         public static final int icon_set_dark=0x7f020021;
         public static final int icon_set_light=0x7f020022;
-        public static final int limpid=0x7f020028;
+        public static final int limpid=0x7f020029;
         public static final int selector=0x7f020023;
         public static final int selector_close=0x7f020024;
         public static final int selector_description=0x7f020025;
         public static final int selector_reset=0x7f020026;
         public static final int selector_set=0x7f020027;
+        public static final int splash=0x7f020028;
     }
     public static final class id {
         public static final int btn_back=0x7f070001;
@@ -88,6 +89,7 @@ public final class R {
         public static final int description=0x7f030000;
         public static final int main=0x7f030001;
         public static final int settings=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class raw {
         public static final int dealsound=0x7f050000;
