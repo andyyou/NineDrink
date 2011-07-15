@@ -65,22 +65,22 @@ public class Settings extends Activity {
 
 	private Button.OnClickListener setdone = new Button.OnClickListener(){
 		public void onClick(View v){
-			int selectCount = 0;
 			processBar.setVisibility(View.VISIBLE);
-			processBar.incrementProgressBy(70);
+			int selectCount = 0;
 			selectCount = selected_number[0] + selected_number[1] + selected_number[2] + 
 			   selected_number[3] + selected_number[4] + selected_number[5] + 
 			   selected_number[6] + selected_number[7] + selected_number[8] + 
 			   selected_number[9] + selected_number[10] + selected_number[11] + 
 			   selected_number[12] + selected_number[13];
-			
 			if(selectCount < 2){
 				setTitle(R.string.limit_msg);
+				processBar.setProgress(0);
+				processBar.setVisibility(View.GONE);
 				limitDialog();
 			} else {
 				for(int i = 0; i < 14; i++){
 					mOpenHelper.update(i, poker_list[i]);
-					processBar.incrementProgressBy(5);
+					processBar.incrementProgressBy(10);
 				}
 				finish();
 			}

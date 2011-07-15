@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="btn_reset"> 洗牌 </string>
+    <string name="msg_setting"> 設定中 </string>
     <string name="setting_title">設定：選取加入隨機牌庫</string>
     <string name="select_all">全選</string>
     <string name="select_cancelall">取消全選</string>

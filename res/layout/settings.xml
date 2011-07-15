@@ -23,7 +23,7 @@
     		android:layout_gravity="center_vertical" 
     		style="?android:attr/progressBarStyleHorizontal"
         	android:max="140"
-			android:progress="10"
+			android:progress="0"
     />
     </TableRow>
 	<TableRow>
