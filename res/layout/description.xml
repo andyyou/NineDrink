@@ -2,29 +2,21 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:background = "@drawable/description"
 	android:stretchColumns="*"
 	>
-	<TableRow>
-		<ImageView android:id="@+id/img_description" 
-			android:layout_height="wrap_content" 
-			android:layout_width="wrap_content" 
-			android:src="@drawable/description"
-			android:layout_span="2"
-			>
-		</ImageView>
-	</TableRow>
 	<TableRow>
 		<Button android:id="@+id/btn_statment" 
 			android:text="@string/btn_description"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:layout_marginTop="10px"
+			android:layout_marginTop="450dip"
 		/> 
 		<Button android:id="@+id/btn_back" 
 			android:text="@string/btn_back"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:layout_marginTop="10px"
+			android:layout_marginTop="450dip"
 		/>
 	</TableRow>
 </TableLayout>
