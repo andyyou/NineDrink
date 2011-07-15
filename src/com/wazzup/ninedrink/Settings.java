@@ -78,7 +78,6 @@ public class Settings extends Activity {
 				setTitle(R.string.limit_msg);
 				limitDialog();
 			} else {
-				
 				for(int i = 0; i < 14; i++){
 					mOpenHelper.update(i, poker_list[i]);
 					processBar.incrementProgressBy(5);

@@ -14,5 +14,5 @@
     <string name="btn_back">返回</string>
     <string name="btn_description">说明</string>
     <string name="about_msg">NineDrink\n 饮酒时的小品游戏。\n 作者：Andy Eddy</string>
-    <string name="about_description">游戏名称：7+8酒\ N游戏人数：2\ N1：摇-摇随机锟牌\ N2：点击，翻开您抽到的牌\ N3：牌面解释如下：7加酒，8减酒，9请喝酒！\ N其他通行证。\ N※本程式提供自订牌组，可依需求增减扑克牌。</string>
+    <string name="about_description">游戏名称：7+8-酒 \n游戏人数：2+\n1: 摇一摇随机抽牌。\n2: 点击，翻开您抽到的牌。\n3: 牌面解释如下：7 加酒，8 减酒，9 请喝酒！\n其他Pass。\n※ 本程序提供自定义牌组，可依需求增减扑克牌。</string>
 </resources>
