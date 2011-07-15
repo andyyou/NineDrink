@@ -364,12 +364,15 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	public boolean onKeyDown(int keyCode,KeyEvent event){
 		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
 			cheat_mod = 1; //Always lose
+			return true;
 		}else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
 			cheat_mod = 2; //Always win and Plus Drink XD
+			return true;
 		}else{
 			cheat_mod = 0; //Cancel
+			return false;
 		}
-		return true;
+		
 	}
 
 	public void switch_cards(int n){

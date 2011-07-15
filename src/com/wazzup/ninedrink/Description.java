@@ -1,5 +1,9 @@
 package com.wazzup.ninedrink;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 
 
 public class Description extends Activity {
@@ -18,6 +23,15 @@ public class Description extends Activity {
 		setContentView(R.layout.description);
 		findView();
 		setLisenter();
+		// Create the adView
+	    AdView adView = new AdView(this, AdSize.BANNER, "a14e205a4aecaef");
+	    // Lookup your LinearLayout assuming it¡¦s been given
+	    // the attribute android:id="@+id/mainLayout"
+	    TableLayout layout = (TableLayout)findViewById(R.id.description_layout);
+	    // Add the adView to it
+	    layout.addView(adView);
+	    // Initiate a generic request to load it with an ad
+	    adView.loadAd(new AdRequest());
 		
 	}
 	

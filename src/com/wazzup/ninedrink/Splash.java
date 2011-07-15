@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 
+
 public class Splash extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -18,6 +19,8 @@ public class Splash extends Activity {
 		timer = new Timer(true);
 		startTime = System.currentTimeMillis();
 		timer.schedule(task, 0, 1);
+		
+
 	}
 	
 	private Timer timer;

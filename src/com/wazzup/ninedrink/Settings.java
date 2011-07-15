@@ -1,5 +1,9 @@
 package com.wazzup.ninedrink;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 public class Settings extends Activity {
@@ -20,6 +25,16 @@ public class Settings extends Activity {
 		setListener();
 		mOpenHelper = new NDDBOpenHelper(this);
 		getAll();
+		
+		// Create the adView
+	    AdView adView = new AdView(this, AdSize.BANNER, "a14e205a4aecaef");
+	    // Lookup your LinearLayout assuming it¡¦s been given
+	    // the attribute android:id="@+id/mainLayout"
+	    TableLayout layout = (TableLayout)findViewById(R.id.settings_layout);
+	    // Add the adView to it
+	    layout.addView(adView);
+	    // Initiate a generic request to load it with an ad
+	    adView.loadAd(new AdRequest());
 	}
 
 	//«Å§i
