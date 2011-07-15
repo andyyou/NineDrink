@@ -1,11 +1,7 @@
 package com.wazzup.ninedrink;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -76,7 +72,7 @@ public class Settings extends Activity {
 				limitDialog();
 			} else {
 				for(int i = 0; i < 14; i++){
-					updateItem(i, poker_list[i]);
+					mOpenHelper.update(i, poker_list[i]);
 				}
 				//finish(); //如果只有finish()返回db不會從拉，設定不會及時。
 				//Intent i = new Intent();
@@ -128,9 +124,8 @@ public class Settings extends Activity {
 	// 取得所有記錄
 	public void getAll(){
 		int i = 0;
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		Cursor result = db.query(Constants.TABLE_NAME, null, null, null, null, null, null);
-			
+		Cursor result = mOpenHelper.getAll();
+
 		result.moveToFirst();
 		while (!result.isAfterLast()){
 			i = result.getInt(0);
@@ -156,18 +151,6 @@ public class Settings extends Activity {
 		}else{
 			btn_selectall.setText(R.string.select_cancelall);
 			is_selected_all = false;
-		}
-	}
-
-	//更新一筆資料
-	public void updateItem(int poker_number ,boolean is_into){
-		try {
-			SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-			ContentValues args = new ContentValues();
-			args.put("is_into", is_into);
-			db.update("set_poker", args, "poker_number = "+ String.valueOf(poker_number) , null);
-		} catch (SQLException e){
-			setTitle("更新資料失敗");
 		}
 	}
 
