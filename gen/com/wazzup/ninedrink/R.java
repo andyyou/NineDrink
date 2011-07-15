@@ -92,6 +92,7 @@ public final class R {
         public static final int dealsound=0x7f050000;
     }
     public static final class string {
+        public static final int about_description=0x7f06000e;
         public static final int about_msg=0x7f06000d;
         public static final int about_title=0x7f06000a;
         public static final int app_name=0x7f060007;

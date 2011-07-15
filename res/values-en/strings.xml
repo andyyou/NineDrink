@@ -14,4 +14,5 @@
     <string name="btn_back">Back</string>
     <string name="btn_description">Descriptions</string>
     <string name="about_msg">NineDrink\n A popular drinking game.\n Author：Andy Eddy</string>
+    <string name="about_description">Game：7+8-Wine \nPlyaers：2+\nStep1: Shake to reset pokers.\nStep2: Hit!Open your card.\nStep3: Rules：7 Plus more wine. 8 Reduce or not wine. 9 Drunk！\nOther cards : Pass.\n※ You can set your pokers in settings.</string>
 </resources>
