@@ -13,7 +13,19 @@
 			android:layout_span="3"
 		/>
 	</TableRow>
-
+	<TableRow>
+		<ProgressBar
+    		android:id="@+id/processBar"  
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:visibility="gone"
+    		android:layout_span="3"
+    		android:layout_gravity="center_vertical" 
+    		style="?android:attr/progressBarStyleHorizontal"
+        	android:max="140"
+			android:progress="10"
+    />
+    </TableRow>
 	<TableRow>
 		<CheckBox android:id="@+id/checkBox1" 
 			android:layout_width="fill_parent" 
@@ -111,4 +123,5 @@
 			android:layout_height="wrap_content"
 		/>
 	</TableRow>
+	
 </TableLayout>

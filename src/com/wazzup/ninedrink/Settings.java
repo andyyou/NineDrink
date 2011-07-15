@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Settings extends Activity {
@@ -28,7 +29,8 @@ public class Settings extends Activity {
 	private int[] selected_number = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	private boolean is_selected_all = false;
 	private CheckBox[] cbox_poker = new CheckBox[14] ;
-	private boolean[] poker_list ={false,false,false,false,false,false,false,false,false,false,false,false,false,false};
+	private boolean[] poker_list = {false,false,false,false,false,false,false,false,false,false,false,false,false,false};
+	private ProgressBar processBar = null;
 	private int[] cboxId = {
 		R.id.checkBox0,R.id.checkBox1,R.id.checkBox2,
 		R.id.checkBox3,R.id.checkBox4,R.id.checkBox5,
@@ -36,7 +38,7 @@ public class Settings extends Activity {
 		R.id.checkBox9,R.id.checkBox10,R.id.checkBox11,
 		R.id.checkBox12,R.id.checkBox13
 	};
-
+	
 	//設定資料庫
 	public NDDBOpenHelper mOpenHelper;
 
@@ -48,6 +50,7 @@ public class Settings extends Activity {
 		btn_cancel = (Button)findViewById(R.id.btn_setcancel);
 		btn_done = (Button)findViewById(R.id.btn_setcomplete);
 		btn_selectall = (Button)findViewById(R.id.btn_selectall);
+		processBar=(ProgressBar)findViewById(R.id.processBar);
 	}
 
 	//偵聽
@@ -71,8 +74,11 @@ public class Settings extends Activity {
 				setTitle(R.string.limit_msg);
 				limitDialog();
 			} else {
+				processBar.setVisibility(View.VISIBLE);
 				for(int i = 0; i < 14; i++){
 					mOpenHelper.update(i, poker_list[i]);
+					processBar.incrementProgressBy(10);;
+					
 				}
 				//finish(); //如果只有finish()返回db不會從拉，設定不會及時。
 				//Intent i = new Intent();
