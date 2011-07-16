@@ -9,7 +9,7 @@
 	<TableRow>
 		<TextView android:id="@+id/show_msg"
 			android:layout_width="fill_parent"
-			android:layout_height="20px"
+			android:layout_height="wrap_content"
 			android:text="@string/setting_title"
 			android:layout_span="3"
 		/>

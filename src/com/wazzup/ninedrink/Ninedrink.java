@@ -48,8 +48,13 @@ public class Ninedrink extends Activity implements SensorEventListener {
 
 	@Override
 	public void onPause(){
+		
 		super.onPause();
 		pokerList.clear();
+		if (mSensorManager != null) {   
+			mSensorManager.unregisterListener(this);   
+			mSensorManager = null;   
+        }
 	}
 
 	@Override
@@ -268,6 +273,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			Intent i = new Intent();
 			i.setClass(Ninedrink.this, Settings.class);
 			startActivity(i);
+			
 		}
 	};
 
