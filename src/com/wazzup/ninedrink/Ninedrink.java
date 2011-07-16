@@ -57,6 +57,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
         }
 	}
 
+
 	@Override
     protected void onRestart() {
 		super.onRestart();
