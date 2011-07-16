@@ -123,7 +123,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		//Ads--Start
 		adView = (AdView)findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest();
-		adRequest.setTesting(true);
+		//adRequest.setTesting(true);
 		adView.loadAd(adRequest);
 		//Ads--End
 		//設定其他物件

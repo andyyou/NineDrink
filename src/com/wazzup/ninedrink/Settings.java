@@ -58,7 +58,7 @@ public class Settings extends Activity {
 		//Ads--Start
 		adView = (AdView)findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest();
-		adRequest.setTesting(true);
+		//adRequest.setTesting(true);
 		adView.loadAd(adRequest);
 		//Ads--End
 	}
