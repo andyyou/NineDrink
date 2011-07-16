@@ -1,9 +1,5 @@
 package com.wazzup.ninedrink;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,8 +8,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
 import android.widget.Toast;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 public class Settings extends Activity {
 	/** Called when the activity is first created. */
@@ -25,22 +23,13 @@ public class Settings extends Activity {
 		setListener();
 		mOpenHelper = new NDDBOpenHelper(this);
 		getAll();
-		
-		// Create the adView
-	    AdView adView = new AdView(this, AdSize.BANNER, "a14e205a4aecaef");
-	    // Lookup your LinearLayout assuming it¡¦s been given
-	    // the attribute android:id="@+id/mainLayout"
-	    TableLayout layout = (TableLayout)findViewById(R.id.settings_layout);
-	    // Add the adView to it
-	    layout.addView(adView);
-	    // Initiate a generic request to load it with an ad
-	    adView.loadAd(new AdRequest());
 	}
 
 	//«Å§i
 	private Button btn_cancel;
 	private Button btn_done;
 	private Button btn_selectall ;
+	private AdView adView;
 	private int[] selected_number = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	private boolean is_selected_all = false;
 	private CheckBox[] cbox_poker = new CheckBox[14] ;
@@ -66,6 +55,12 @@ public class Settings extends Activity {
 		btn_done = (Button)findViewById(R.id.btn_setcomplete);
 		btn_selectall = (Button)findViewById(R.id.btn_selectall);
 		processBar=(ProgressBar)findViewById(R.id.processBar);
+		//Ads--Start
+		adView = (AdView)findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest();
+		adRequest.setTesting(true);
+		adView.loadAd(adRequest);
+		//Ads--End
 	}
 
 	//°»Å¥

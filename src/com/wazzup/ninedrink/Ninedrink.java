@@ -28,6 +28,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
+
 public class Ninedrink extends Activity implements SensorEventListener {
 	/** Called when the activity is first created. */
 	@Override
@@ -59,6 +62,7 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	private ImageView btn_close;
 	private ImageView btn_set;
 	private ImageView btn_description;
+	private AdView adView;
 	private int[] set_number;
 
 	//用來判斷是否已翻開
@@ -116,6 +120,12 @@ public class Ninedrink extends Activity implements SensorEventListener {
 		btn_close = (ImageView)findViewById(R.id.imgbtn_close);
 		btn_set = (ImageView)findViewById(R.id.imgbtn_set);
 		btn_description = (ImageView)findViewById(R.id.imgbtn_description);
+		//Ads--Start
+		adView = (AdView)findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest();
+		adRequest.setTesting(true);
+		adView.loadAd(adRequest);
+		//Ads--End
 		//設定其他物件
 		mp = MediaPlayer.create(getBaseContext(), R.raw.dealsound);
 	}

@@ -19,8 +19,6 @@ public class Splash extends Activity {
 		timer = new Timer(true);
 		startTime = System.currentTimeMillis();
 		timer.schedule(task, 0, 1);
-		
-
 	}
 	
 	private Timer timer;
