@@ -47,13 +47,12 @@ public class Ninedrink extends Activity implements SensorEventListener {
 	}
 
 	@Override
-	public void onPause(){
-		
+	public void onPause(){		
 		super.onPause();
 		pokerList.clear();
 		if (mSensorManager != null) {   
 			mSensorManager.unregisterListener(this);   
-			mSensorManager = null;   
+			mSensorManager = null;   			
         }
 	}
 
@@ -203,7 +202,9 @@ public class Ninedrink extends Activity implements SensorEventListener {
 			SensorManager.SENSOR_DELAY_UI);
 		mSensorListener.setOnShakeListener(new Ninedrink.OnShakeListener(){
 			public void onShake(){
-				reset_card();
+				if(pokerList.size() >0){
+					reset_card();
+				}	
 			}
 		});
 	}
